@@ -1,5 +1,6 @@
 #left #tl_navigation a.navigation.icon {
 	padding-left: 0 !important;
+	background-image: none;
 }
 
 .icon {
