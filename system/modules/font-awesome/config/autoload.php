@@ -5,9 +5,11 @@
  * 
  * Copyright (C) 2005-2012 Leo Feyer
  * 
- * @package News
- * @link    http://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @package   font-awesome 
+ * @author    David Molineus <http://www.netzmacht.de>
+ * @license   GNU/LGPL 
+ * @copyright Copyright 2012 David Molineus netzmacht creative 
+ * 
  */
 
 /**
@@ -27,3 +29,7 @@ ClassLoader::addClasses(array
 	'Netzmacht\IconReplacer'		=> 'system/modules/font-awesome/classes/IconReplacer.php',
 	'Netzmacht\FontAwesome'		=> 'system/modules/font-awesome/classes/FontAwesome.php',
 ));
+
+if($_GET['do'] == 'repository_manager' && ($_GET['install'] != '' || $_GET['uninstall'] != '')) {
+	ClassLoader::addClass('BackendTemplate', 'system/modules/font-awesome/classes/BackendTemplate.php');
+}
