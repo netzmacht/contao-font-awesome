@@ -82,7 +82,8 @@ class FontAwesome extends Backend
 		
 		
 		// add css and javascript files
-		if($strTemplate == 'be_main')	
+		//echo var_dump($strTemplate);
+		if(in_array($strTemplate, $GLOBALS['useFontAwesomeOnTemplates']))	
 		{
 			unset($GLOBALS['TL_CSS']);
 			$objTemplate->stylesheets .= '<!-- Font Awesome icons used, licensed under CC BY 3.0: Font Awesome - http://fortawesome.github.com/Font-Awesome -->';

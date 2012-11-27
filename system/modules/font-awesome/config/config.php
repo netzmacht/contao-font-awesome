@@ -20,3 +20,6 @@ if(TL_MODE == 'BE')
 {
 	require_once TL_ROOT . '/system/modules/font-awesome/config/icons.php';
 }
+
+$GLOBALS['useFontAwesomeOnTemplates'] = array('be_main');
+
