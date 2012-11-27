@@ -14,7 +14,7 @@
 
 namespace Netzmacht;
 use Backend;
-
+use Input;
 
 /**
  * icon replacer adds javascript to backend template if the icon replacer is enabled 
@@ -32,10 +32,11 @@ class FontAwesome extends Backend
 	{		
 		$this->import('BackendUser', 'User');
 		
-		return (
+		return (			
 			$GLOBALS['TL_CONFIG']['requireFontAwesome'] || 
 			$GLOBALS['TL_CONFIG']['forceFontAwesome'] || 
-			$this->User->useFontAwesome == '1'
+			$this->User->useFontAwesome == '1' ||
+			(Input::get('do') == 'repository_manager' && (Input::get('install') != '' || Input::get('uninstall') != ''))
 		);
 	}
 	
