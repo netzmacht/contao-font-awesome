@@ -14,6 +14,7 @@
  
 // register hook
 $GLOBALS['TL_HOOKS']['parseTemplate'][] = array('Netzmacht\FontAwesome', 'onParseTemplate');
+$GLOBALS['SETUP_EXT_HOOK']['font-awesome'][] = array('Netzmacht\FontAwesome', 'onParseTemplate');
 
 // load icons config
 if(TL_MODE == 'BE') 
