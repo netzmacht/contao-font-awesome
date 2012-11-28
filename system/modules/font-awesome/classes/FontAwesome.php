@@ -83,14 +83,11 @@ class FontAwesome extends Backend
 		
 		
 		// add css and javascript files
-		//echo var_dump($strTemplate);
 		if(in_array($strTemplate, $GLOBALS['useFontAwesomeOnTemplates']))	
 		{
-			unset($GLOBALS['TL_CSS']);
-			$objTemplate->stylesheets .= '<!-- Font Awesome icons used, licensed under CC BY 3.0: Font Awesome - http://fortawesome.github.com/Font-Awesome -->';
-			$objTemplate->stylesheets .= '<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.css">';
-			$objTemplate->stylesheets .= '<link rel="stylesheet" href="system/modules/font-awesome/assets/icons.css">';
-			
+			$objTemplate->stylesheets .= '<!-- Font Awesome icons used, licensed under CC BY 3.0: Font Awesome - http://fortawesome.github.com/Font-Awesome -->' . "\r\n";
+			$objTemplate->stylesheets .= '<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.css">' . "\r\n";
+			$objTemplate->stylesheets .= '<link rel="stylesheet" href="system/modules/font-awesome/assets/icons.css">' . "\r\n";
 			
 			$arrConfig = $GLOBALS['ICON_REPLACER'];
 			
@@ -104,8 +101,8 @@ class FontAwesome extends Backend
 			
 			// append javascript
 			$strJson = json_encode($arrConfig);		
-			$objTemplate->javascripts .= sprintf('<script type="text/javascript">replaceIconsConfig = %s;</script>', $strJson);
-			$objTemplate->javascripts .= '<script src="system/modules/font-awesome/assets/replacer.js"></script>';					
+			$objTemplate->javascripts .= sprintf('<script type="text/javascript">var replaceIconsConfig = %s;</script>', $strJson) . "\r\n";
+			$objTemplate->javascripts .= '<script type="text/javascript" src="system/modules/font-awesome/assets/replacer.js"></script>' . "\r\n";					
 		}		
 	}
 	
