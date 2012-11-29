@@ -45,7 +45,8 @@
 	padding-bottom: 0;
 }
 
-.cte_type.published.icon {
+.cte_type.published.icon,
+.cte_type.unpublished.icon {
 	background-image: none;
-	padding: none;
+	padding-left: 0px;
 }
