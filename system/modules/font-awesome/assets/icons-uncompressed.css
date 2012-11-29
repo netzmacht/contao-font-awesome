@@ -44,3 +44,8 @@
 	padding-top: 3px;
 	padding-bottom: 0;
 }
+
+.cte_type.published.icon {
+	background-image: none;
+	padding: none;
+}
