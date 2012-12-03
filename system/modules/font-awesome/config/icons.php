@@ -179,11 +179,12 @@ $GLOBALS['ICON_REPLACER'] = array
 			array('magic', 'css'),
 			array('globe', 'dlh_googlemaps'),
 			array('pencil', 'edit'),
+			array('wrench', 'htaccess'),
 			array('columns', 'layout'),
 			array('th-large', 'modules'),
 			array('plus', 'theme_plus_javascript'),
 			array('plus', 'theme_plus_stylesheet'),
-			array('plus', 'theme_plus_variable'),
+			array('plus', 'theme_plus_variable'),			
 		),
 		
 		'listenTo' => array 
