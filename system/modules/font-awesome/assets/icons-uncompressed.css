@@ -1,3 +1,6 @@
+#left #tl_navigation a.navigation {
+	padding-left: 20px !important;
+}
 #left #tl_navigation a.navigation.icon {
 	padding-left: 0 !important;
 	background-image: none;
@@ -43,10 +46,4 @@
 	text-align: center;
 	padding-top: 3px;
 	padding-bottom: 0;
-}
-
-.cte_type.published.icon,
-.cte_type.unpublished.icon {
-	background-image: none;
-	padding-left: 0px;
 }
