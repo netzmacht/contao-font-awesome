@@ -209,27 +209,36 @@ window.addEvent('domready', function() {
 	Object.each(replaceIconsConfig, function(config, key) {
 		var replacer = new IconReplacer(config.target, config.addSpace);
 		
-		config.imageIcons.each(function(image) {
-			replacer.addImageIcon(image[0], image[1], image[2]);
-		});
+		if(typeof config.imageIcons !== 'undefined')
+		{
+			config.imageIcons.each(function(image) {
+				replacer.addImageIcon(image[0], image[1], image[2]);
+			});
+		}
 		
-		config.styleIcons.each(function(style) {
-			// we replaced order of style settings in icons.php
-			// so we have to do the changes in the javascript add order
-			replacer.addStyleIcon(style[1], style[0], style[2]);
-		});
+		if(typeof config.styleIcons !== 'undefined')
+		{
+			config.styleIcons.each(function(style) {
+				// we replaced order of style settings in icons.php
+				// so we have to do the changes in the javascript add order
+				replacer.addStyleIcon(style[1], style[0], style[2]);
+			});
+		}
 		
-		config.listenTo.each(function(listen) {
-			if(listen[0] == 'window') {
-				replacer.listenTo(window, listen[1]);
-			}
-			else if(listen[0] == 'document') {
-				replacer.listenTo(document, listen[1]);
-			}
-			else {
-				replacer.listenTo($$(listen[0]), listen[1]);
-			}
-		});
+		if(typeof config.listenTo !== 'undefined')
+		{
+			config.listenTo.each(function(listen) {
+				if(listen[0] == 'window') {
+					replacer.listenTo(window, listen[1]);
+				}
+				else if(listen[0] == 'document') {
+					replacer.listenTo(document, listen[1]);
+				}
+				else {
+					replacer.listenTo($$(listen[0]), listen[1]);
+				}
+			});
+		}
 	});
 	
 	// handle icon toggling of plus/minus icons of navigation
