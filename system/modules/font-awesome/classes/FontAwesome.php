@@ -35,8 +35,7 @@ class FontAwesome extends Backend
 		return (			
 			$GLOBALS['TL_CONFIG']['requireFontAwesome'] || 
 			$GLOBALS['TL_CONFIG']['forceFontAwesome'] || 
-			$this->User->useFontAwesome == '1' ||
-			(Input::get('do') == 'repository_manager' && (Input::get('install') != '' || Input::get('uninstall') != ''))
+			$this->User->useFontAwesome == '1'
 		);
 	}
 	
