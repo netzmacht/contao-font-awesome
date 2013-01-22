@@ -10,6 +10,11 @@
 	background-image: none;
 }
 
+.icon.cte_type.unpublished {
+	background-image: none;
+	padding-left: 0;
+}
+
 .icon-large {
 	vertical-align: -1px;
 	opacity: 0.8;
@@ -19,21 +24,7 @@
 	opacity: 0.4;
 }
 
-.header_home.icon, 
-.header_user.icon, 
-.header_preview.icon, 
-.header_clipboard.icon, 
-.header_logout.icon, 
-.header_back.icon, 
-.header_new.icon, 
-.header_rss.icon, 
-.header_edit_all.icon, 
-.header_delete_all.icon, 
-.header_new_folder.icon, 
-.header_css_import.icon, 
-.header_theme_import.icon, 
-.header_toggle.icon, 
-.header_sync.icon {
+.icon[class^="header_"] {
 	padding-left: 0px;
 }
 
