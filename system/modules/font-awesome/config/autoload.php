@@ -3,29 +3,28 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2013 Leo Feyer
  * 
- * @package   font-awesome 
- * @author    David Molineus <http://www.netzmacht.de>
- * @license   GNU/LGPL 
- * @copyright Copyright 2012 David Molineus netzmacht creative 
- * 
+ * @package Font-awesome
+ * @link    https://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-/**
- * Register the namespaces
- */
-ClassLoader::addNamespaces(array
-(
-	'Netzmacht',
-));
 
 /**
  * Register the classes
  */
 ClassLoader::addClasses(array
 (
+	// Elements
+	'Netzmacht\FontAwesome\ContentIcon'             => 'system/modules/font-awesome/elements/ContentIcon.php',
+
+
 	// Classes
-	'Netzmacht\IconReplacer'		=> 'system/modules/font-awesome/classes/IconReplacer.php',
-	'Netzmacht\FontAwesome'		=> 'system/modules/font-awesome/classes/FontAwesome.php',
+	'Netzmacht\FontAwesome\IconReplacer'            => 'system/modules/font-awesome/classes/IconReplacer.php',
+	'Netzmacht\FontAwesome\FontAwesome'             => 'system/modules/font-awesome/classes/FontAwesome.php',
+));
+
+TemplateLoader::addFiles(array(
+	'ce_icon' => 'system/modules/font-awesome/templates',
 ));
