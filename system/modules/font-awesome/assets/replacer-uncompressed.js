@@ -260,13 +260,15 @@ window.addEvent('domready', function() {
 	{
 		var icon = group.getElement('i');	
 		
-		if(new String(icon.getPrevious('img').get('src')).test('Minus')) {
-			icon.addClass('icon-minus-sign');
-			icon.removeClass('icon-plus-sign');
+		if (icon != undefined) {
+			if(new String(icon.getPrevious('img').get('src')).test('Minus')) {
+				icon.addClass('icon-minus-sign');
+				icon.removeClass('icon-plus-sign');
+			}
+			else {
+				icon.removeClass('icon-minus-sign');
+				icon.addClass('icon-plus-sign');
+			}
 		}
-		else {
-			icon.removeClass('icon-minus-sign');
-			icon.addClass('icon-plus-sign');
-		}		
 	});
 });
