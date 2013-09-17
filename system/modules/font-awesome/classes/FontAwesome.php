@@ -86,7 +86,7 @@ class FontAwesome extends Backend
 		{
 			$objTemplate->stylesheets .= '<!-- Font Awesome icons used, licensed under CC BY 3.0: Font Awesome - http://fortawesome.github.com/Font-Awesome -->' . "\r\n";
 			$objTemplate->stylesheets .= '<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.css">' . "\r\n";
-			$objTemplate->stylesheets .= '<link rel="stylesheet" href="system/modules/font-awesome/assets/icons.css">' . "\r\n";
+			$objTemplate->stylesheets .= '<link rel="stylesheet" href="system/modules/font-awesome/assets/icons.min.css">' . "\r\n";
 			
 			$arrConfig = $GLOBALS['ICON_REPLACER'];
 			
