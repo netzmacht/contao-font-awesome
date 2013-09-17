@@ -23,7 +23,7 @@ else {
 // load icons config
 if(TL_MODE == 'BE') 
 {
-	require_once TL_ROOT . '/system/modules/font-awesome/config/icons.php';
+	require_once TL_ROOT . '/system/modules/font-awesome/config/icons/replacer.php';
 }
 
 // define which templates
