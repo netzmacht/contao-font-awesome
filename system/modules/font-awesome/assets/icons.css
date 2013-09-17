@@ -21,6 +21,17 @@
     font-size: 0.9em;
 }
 
+.tl_listing .tl_left i{
+    text-indent: 0;
+    margin-top: 1px;
+    font-size: 1.3em;
+    display: inline-block;
+}
+
+.tl_listing .tl_folder_top .tl_left i {
+    margin-bottom: 2px;
+}
+
 .icon.cte_type.unpublished {
     background-image: none;
     padding-left: 0;
@@ -28,6 +39,10 @@
 
 .icon-large {
     opacity: 0.8;
+}
+
+i.margin {
+    margin-top: 2px;
 }
 
 .icon-disabled {
@@ -42,9 +57,10 @@
 .tl_right i,
 .tl_content_header i,
 .tl_right_nowrap i {
-    width: 17px !important;
-    height: 14px;
+    width: 16px !important;
+    height: 12px;
     text-align: center;
-    padding-top: 3px;
     padding-bottom: 0;
+    display: inline-block;
+    font-size: 0.95em;
 }

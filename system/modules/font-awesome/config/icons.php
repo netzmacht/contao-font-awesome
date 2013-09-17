@@ -26,6 +26,7 @@ $GLOBALS['ICON_REPLACER']['buttons']['styleIcons'][] = array('refresh', 'header_
 $GLOBALS['ICON_REPLACER']['buttons']['styleIcons'][] = array('folder-close', 'header_new_folder');
 $GLOBALS['ICON_REPLACER']['buttons']['styleIcons'][] = array('download-alt', 'header_theme_import');
 $GLOBALS['ICON_REPLACER']['buttons']['styleIcons'][] = array('download-alt', 'header_css_import');
+$GLOBALS['ICON_REPLACER']['buttons']['styleIcons'][] = array('shopping-cart', 'header_store');
 $GLOBALS['ICON_REPLACER']['buttons']['listenTo'][] = array('document', 'domready');	
 		
 // context icons (right listed one)
@@ -55,6 +56,7 @@ $GLOBALS['ICON_REPLACER']['context']['imageIcons'][] = array('lock', 'protect_.g
 $GLOBALS['ICON_REPLACER']['context']['imageIcons'][] = array('info-sign', 'show.gif');
 $GLOBALS['ICON_REPLACER']['context']['imageIcons'][] = array('undo', 'undo.gif');
 $GLOBALS['ICON_REPLACER']['context']['imageIcons'][] = array('eye-open', '/visible.gif');
+$GLOBALS['ICON_REPLACER']['context']['imageIcons'][] = array('cogs', 'modules.gif');
 $GLOBALS['ICON_REPLACER']['context']['listenTo'][] = array('window', 'ajax_change');
 $GLOBALS['ICON_REPLACER']['context']['listenTo'][] = array('document', 'domready');
 
@@ -111,6 +113,19 @@ $GLOBALS['ICON_REPLACER']['navigation']['styleIcons'][] = array('th-large', 'mod
 $GLOBALS['ICON_REPLACER']['navigation']['styleIcons'][] = array('plus', 'theme_plus_javascript');
 $GLOBALS['ICON_REPLACER']['navigation']['styleIcons'][] = array('plus', 'theme_plus_stylesheet');
 $GLOBALS['ICON_REPLACER']['navigation']['styleIcons'][] = array('plus', 'theme_plus_variable');
+$GLOBALS['ICON_REPLACER']['navigation']['styleIcons'][] = array('time', 'cron');
+$GLOBALS['ICON_REPLACER']['navigation']['styleIcons'][] = array('columns', 'columnset');
 
 $GLOBALS['ICON_REPLACER']['navigation']['listenTo'][] = array('window', 'ajax_change');
 $GLOBALS['ICON_REPLACER']['navigation']['listenTo'][] = array('document', 'domready');
+
+// tl_left icons
+$GLOBALS['ICON_REPLACER']['inline']['target'] = '.tl_folder .tl_left img, .tl_folder_top .tl_left img';
+$GLOBALS['ICON_REPLACER']['inline']['addSpace'] = false;
+
+$GLOBALS['ICON_REPLACER']['inline']['imageIcons'][] = array('globe', 'pagemounts.gif', array('size' => 'normal', 'onlyHide' => true));
+$GLOBALS['ICON_REPLACER']['inline']['imageIcons'][] = array('globe', 'root.gif', array('size' => 'normal', 'onlyHide' => true));
+$GLOBALS['ICON_REPLACER']['inline']['imageIcons'][] = array('globe', 'root_1.gif', array('size' => 'normal', 'onlyHide' => true, 'addClass' => 'icon-disabled'));
+
+$GLOBALS['ICON_REPLACER']['inline']['listenTo'][] = array('window', 'ajax_change');
+$GLOBALS['ICON_REPLACER']['inline']['listenTo'][] = array('document', 'domready');
