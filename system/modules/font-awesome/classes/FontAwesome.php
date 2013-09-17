@@ -12,7 +12,7 @@
  * 
  */  
 
-namespace Netzmacht;
+namespace Netzmacht\FontAwesome;
 use Backend;
 use Input;
 
@@ -23,6 +23,9 @@ use Input;
 class FontAwesome extends Backend
 {
 
+	/**
+	 * constructor
+	 */
 	public function __construct()
 	{
 		$this->import('BackendUser', 'User');
@@ -47,9 +50,13 @@ class FontAwesome extends Backend
 		);
 	}
 
-	public function onInitializeSystem()
+
+	/**
+	 * initialize system
+	 */
+	public function initialize()
 	{
-		// user is not authenticated at this moment.
+		// user is not authenticated at this point. we need it so isActive can access user settings.
 		$this->User->authenticate();
 
 		if(!$this->isActive())
@@ -67,11 +74,11 @@ class FontAwesome extends Backend
 		// we use customized navigation templates so we do not need to load icons dynamically
 		if($strDefaultPath == $strOriginPath)
 		{
-			\TemplateLoader::addFile('be_main', 'system/modules/font-awesome/templates');
-			$GLOBALS['ICON_REPLACER']['navigation']['phpOnly'] = true;
+			\TemplateLoader::addFile('be_main', 'system/modules/font-awesome/templates/dynamic');
+			//$GLOBALS['ICON_REPLACER']['navigation']['phpOnly'] = true;
 		}
 
-		\TemplateLoader::addFile('be_navigation', 'system/modules/font-awesome/templates');
+		\TemplateLoader::addFile('be_navigation', 'system/modules/font-awesome/templates/dynamic');
 
 		// remove config which should not pass to javascript
 		$arrConfig = $GLOBALS['ICON_REPLACER'];
@@ -86,7 +93,7 @@ class FontAwesome extends Backend
 		// append javascript
 		$strJson = json_encode($arrConfig);
 		$GLOBALS['TL_MOOTOOLS'][] = sprintf('<script type="text/javascript">var replaceIconsConfig = %s;</script>', $strJson);
-		$GLOBALS['TL_MOOTOOLS'][] = '<script type="text/javascript" src="system/modules/font-awesome/assets/replacer.js"></script>';
+		$GLOBALS['TL_MOOTOOLS'][] = '<script type="text/javascript" src="system/modules/font-awesome/assets/replacer.min.js"></script>';
 
 		$GLOBALS['TL_CSS']['font-awesome']       = 'assets/font-awesome/css/font-awesome.css|all|static';
 		$GLOBALS['TL_CSS']['font-awesome-icons'] = 'system/modules/font-awesome/assets/icons.min.css|all|static';
@@ -109,7 +116,6 @@ class FontAwesome extends Backend
 	{
 		$parts = explode('::', $tag);
 
-		var_dump($parts['1']);
 		if($parts[0] == $GLOBALS['TL_CONFIG']['fontAwesomeInsertTag'])
 		{
 			$class = str_replace(' ', ' icon-', $parts[1]);
@@ -126,5 +132,31 @@ class FontAwesome extends Backend
 		}
 
 		return false;
+	}
+
+
+	/**
+	 * @return mixed
+	 */
+	public function getAllIcons()
+	{
+		return include TL_ROOT . '/system/modules/font-awesome/config/icons/icons.php';
+	}
+
+
+	/**
+	 * @param $dc
+	 * @return string
+	 */
+	public function generateIcon($dc)
+	{
+		$value = $dc->activeRecord->{$dc->field};
+
+		if($value !== null)
+		{
+			return sprintf('<span style="padding-left: 10px;"><i class="icon-%s"></i></span>', $value);
+		}
+
+		return '';
 	}
 }

@@ -12,7 +12,7 @@
  * 
  */  
 
-namespace Netzmacht;
+namespace Netzmacht\FontAwesome;
 use Backend;
 
 /**
