@@ -22,6 +22,14 @@ use Input;
  */
 class FontAwesome extends Backend
 {
+
+	public function __construct()
+	{
+		$this->import('BackendUser', 'User');
+
+		parent::__construct();
+	}
+
 		
 	/**
 	 * check if font awesome is active
@@ -29,80 +37,58 @@ class FontAwesome extends Backend
 	 * @return bool
 	 */
 	public function isActive()
-	{		
-		$this->import('BackendUser', 'User');
-		
-		return (			
-			$GLOBALS['TL_CONFIG']['requireFontAwesome'] || 
-			$GLOBALS['TL_CONFIG']['forceFontAwesome'] || 
-			$this->User->useFontAwesome == '1'
+	{
+		return (
+			TL_MODE == 'BE' && (
+				$GLOBALS['TL_CONFIG']['requireFontAwesome'] ||
+				$GLOBALS['TL_CONFIG']['forceFontAwesome'] ||
+				$this->User->useFontAwesome == '1'
+			)
 		);
 	}
-	
-	/**
-	 * hook for parseTemplate
-	 * do some template magic
-	 * 
-	 * @param Template
-	 */
-	public function onParseTemplate($objTemplate)
+
+	public function onInitializeSystem()
 	{
-		if(TL_MODE != 'BE' || !$this->isActive())
+		// user is not authenticated at this moment.
+		$this->User->authenticate();
+
+		if(!$this->isActive())
 		{
-			return;			
+			return;
 		}
-		
-		$strTemplate = $objTemplate->getName();
-		
-		// manage navigation icon replacement
-		if($strTemplate == 'be_main' || $strTemplate == 'be_navigation')
+
+		// template settings
+		$strOriginPath = \TemplateLoader::getPath('be_main', 'html5');
+		$strDefaultPath = TL_ROOT . '/system/modules/core/templates/be_main.html5';
+
+		$blnChanged = false;
+
+		// only change be_main if no other be_main then the default one is chosen
+		// we use customized navigation templates so we do not need to load icons dynamically
+		if($strDefaultPath == $strOriginPath)
 		{
-			$strOriginPath = \TemplateLoader::getPath($strTemplate, 'html5');
-			$strDefaultPath = TL_ROOT . '/system/modules/core/templates/be_main.html5';
-			$blnChanged = false;
-			
-			// only change be_main if no other be_main then the default one is chosen
-			// we use customized navigation templates so we do not need to load icons dynamically
-			if($strDefaultPath == $strOriginPath) 
-			{
-				\TemplateLoader::addFile('be_main', 'system/modules/font-awesome/templates');
-				$blnChanged = true;									
-			}
-			
-			// if the be_navigation is overriden by another module, I'm sorry and hope our one will win 
-			// the setting race. But we change it really late so I hope we will figt the game :)
-			\TemplateLoader::addFile('be_navigation', 'system/modules/font-awesome/templates');
-			
-			// do not pass navigation icons to the javascript
-			if($blnChanged || $strTemplate == 'be_navigation') 
-			{			
-				$GLOBALS['ICON_REPLACER']['navigation']['phpOnly'] = true;	
+			\TemplateLoader::addFile('be_main', 'system/modules/font-awesome/templates');
+			$GLOBALS['ICON_REPLACER']['navigation']['phpOnly'] = true;
+		}
+
+		\TemplateLoader::addFile('be_navigation', 'system/modules/font-awesome/templates');
+
+		// remove config which should not pass to javascript
+		$arrConfig = $GLOBALS['ICON_REPLACER'];
+
+		foreach($arrConfig as $strKey => $arrPart)
+		{
+			if(isset($arrPart['phpOnly']) && $arrPart['phpOnly'] == true) {
+				unset($arrConfig[$strKey]);
 			}
 		}
-		
-		
-		// add css and javascript files
-		if(in_array($strTemplate, $GLOBALS['TL_CONFIG']['useFontAwesomeOnTemplates']))
-		{
-			$objTemplate->stylesheets .= '<!-- Font Awesome icons used, licensed under CC BY 3.0: Font Awesome - http://fortawesome.github.com/Font-Awesome -->' . "\r\n";
-			$objTemplate->stylesheets .= '<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.css">' . "\r\n";
-			$objTemplate->stylesheets .= '<link rel="stylesheet" href="system/modules/font-awesome/assets/icons.min.css">' . "\r\n";
-			
-			$arrConfig = $GLOBALS['ICON_REPLACER'];
-			
-			// remove config which should not pass to javascript
-			foreach($arrConfig as $strKey => $arrPart) 
-			{
-				if(isset($arrPart['phpOnly']) && $arrPart['phpOnly'] == true) {
-					unset($arrConfig[$strKey]);
-				}
-			}
-			
-			// append javascript
-			$strJson = json_encode($arrConfig);		
-			$objTemplate->javascripts .= sprintf('<script type="text/javascript">var replaceIconsConfig = %s;</script>', $strJson) . "\r\n";
-			$objTemplate->javascripts .= '<script type="text/javascript" src="system/modules/font-awesome/assets/replacer.js"></script>' . "\r\n";					
-		}		
+
+		// append javascript
+		$strJson = json_encode($arrConfig);
+		$GLOBALS['TL_MOOTOOLS'][] = sprintf('<script type="text/javascript">var replaceIconsConfig = %s;</script>', $strJson);
+		$GLOBALS['TL_MOOTOOLS'][] = '<script type="text/javascript" src="system/modules/font-awesome/assets/replacer.js"></script>';
+
+		$GLOBALS['TL_CSS']['font-awesome']       = 'assets/font-awesome/css/font-awesome.css|all|static';
+		$GLOBALS['TL_CSS']['font-awesome-icons'] = 'system/modules/font-awesome/assets/icons.min.css|all|static';
 	}
-	
 }
