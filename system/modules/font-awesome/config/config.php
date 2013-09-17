@@ -26,5 +26,15 @@ if(TL_MODE == 'BE')
 	require_once TL_ROOT . '/system/modules/font-awesome/config/icons/replacer.php';
 }
 
-// define which templates
-$GLOBALS['TL_CONFIG']['useFontAwesomeOnTemplates'] = array('be_main');
+//
+$GLOBALS['TL_HOOKS']['replaceInsertTags']['font-awesome'] = array('Netzmacht\FontAwesome', 'replaceInsertTag');
+
+// which insert tag will be used
+$GLOBALS['TL_CONFIG']['fontAwesomeInsertTag'] = 'fa';
+
+// support of Bootstrap icon handling
+$GLOBALS['BOOTSTRAP']['icons']['sets']['font-awesome'] = array
+(
+	'path'      => 'system/modules/font-awesome/config/icons/icons.php',
+	'template'  => '<i class="icon-%s"></i>',
+);

@@ -91,4 +91,40 @@ class FontAwesome extends Backend
 		$GLOBALS['TL_CSS']['font-awesome']       = 'assets/font-awesome/css/font-awesome.css|all|static';
 		$GLOBALS['TL_CSS']['font-awesome-icons'] = 'system/modules/font-awesome/assets/icons.min.css|all|static';
 	}
+
+
+	/**
+	 * replace icon insert tag
+	 *
+	 * Following formats are supported
+	 * {{fa::phone}}
+	 * {{fa::phone 4x muted}}                       every entry sperated by space get an icon- prefix
+	 * {{fa::phone rotate-90 large::pull-left}}     2nd param is added as class without prefix
+	 *
+	 * @param $tag
+	 * @param $cache
+	 * @return string
+	 */
+	public function replaceInsertTag($tag, $cache)
+	{
+		$parts = explode('::', $tag);
+
+		var_dump($parts['1']);
+		if($parts[0] == $GLOBALS['TL_CONFIG']['fontAwesomeInsertTag'])
+		{
+			$class = str_replace(' ', ' icon-', $parts[1]);
+
+			if(isset($parts[2]))
+			{
+				$class .= ' ' . $parts[2];
+			}
+
+			return sprintf(
+				$GLOBALS['BOOTSTRAP']['icons']['sets']['font-awesome']['template'],
+				$class
+			);
+		}
+
+		return false;
+	}
 }
