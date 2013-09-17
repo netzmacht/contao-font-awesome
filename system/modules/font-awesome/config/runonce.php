@@ -9,4 +9,5 @@ if(version_compare(VERSION, '3.1', '<'))
 	$file->append('$fa = new FontAwesome();');
 	$file->append('$fa->onInitializeSystem();');
 	$file->append('');
+	$file->close();
 }
