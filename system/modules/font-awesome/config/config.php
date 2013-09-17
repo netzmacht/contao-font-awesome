@@ -10,15 +10,21 @@
  * @license   GNU/LGPL 
  * @copyright Copyright 2012 David Molineus netzmacht creative 
  * 
- */  
- 
-// register hook
-if(version_compare(VERSION, '3.1', '>=')) {
-	$GLOBALS['TL_HOOKS']['initializeSystem'][] = array('Netzmacht\FontAwesome', 'onInitializeSystem');
-}
-else {
-	$GLOBALS['TL_HOOKS']['parseTemplate'][] = array('Netzmacht\FontAwesome', 'onParseTemplate');
-}
+ */
+
+
+/**
+ * content element
+ */
+$GLOBALS['TL_CTE']['texts']['fontAwesomeIcon'] = 'Netzmacht\FontAwesome\ContentIcon';
+
+
+/**
+ * hooks
+ */
+$GLOBALS['TL_HOOKS']['replaceInsertTags']['font-awesome'] = array('Netzmacht\FontAwesome\FontAwesome', 'replaceInsertTag');
+$GLOBALS['TL_HOOKS']['initializeSystem'][]                = array('Netzmacht\FontAwesome\FontAwesome', 'initialize');
+
 
 // load icons config
 if(TL_MODE == 'BE') 
@@ -26,13 +32,10 @@ if(TL_MODE == 'BE')
 	require_once TL_ROOT . '/system/modules/font-awesome/config/icons/replacer.php';
 }
 
-//
-$GLOBALS['TL_HOOKS']['replaceInsertTags']['font-awesome'] = array('Netzmacht\FontAwesome', 'replaceInsertTag');
-
 // which insert tag will be used
 $GLOBALS['TL_CONFIG']['fontAwesomeInsertTag'] = 'fa';
 
-// support of Bootstrap icon handling
+// support of icon handling of Bootstrap extension
 $GLOBALS['BOOTSTRAP']['icons']['sets']['font-awesome'] = array
 (
 	'path'      => 'system/modules/font-awesome/config/icons/icons.php',
