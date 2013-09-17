@@ -23,5 +23,4 @@ if(TL_MODE == 'BE')
 }
 
 // define which templates
-$GLOBALS['useFontAwesomeOnTemplates'] = array('be_main');
-
+$GLOBALS['TL_CONFIG']['useFontAwesomeOnTemplates'] = array('be_main');
