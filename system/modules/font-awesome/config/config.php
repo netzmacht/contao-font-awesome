@@ -22,8 +22,8 @@ $GLOBALS['TL_CTE']['texts']['fontAwesomeIcon'] = 'Netzmacht\FontAwesome\ContentI
 /**
  * hooks
  */
-$GLOBALS['TL_HOOKS']['replaceInsertTags']['font-awesome'] = array('Netzmacht\FontAwesome\FontAwesome', 'replaceInsertTag');
-$GLOBALS['TL_HOOKS']['initializeSystem'][]                = array('Netzmacht\FontAwesome\FontAwesome', 'initialize');
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('Netzmacht\FontAwesome\FontAwesome', 'replaceInsertTag');
+$GLOBALS['TL_HOOKS']['initializeSystem'][]  = array('Netzmacht\FontAwesome\FontAwesome', 'initialize');
 
 
 // load icons config
