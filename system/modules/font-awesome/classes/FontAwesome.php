@@ -57,7 +57,12 @@ class FontAwesome extends Backend
 	public function initialize()
 	{
 		// user is not authenticated at this point. we need it so isActive can access user settings.
+		// will override tl_language settings, so store it
+		// @see https://github.com/bit3/contao-theme-plus/issues/58
+
+		$lang = $GLOBALS['TL_LANGUAGE'];
 		$this->User->authenticate();
+		$GLOBALS['TL_LANGUAGE'] = $lang;
 
 		if(!$this->isActive())
 		{
@@ -66,7 +71,7 @@ class FontAwesome extends Backend
 
 		// template settings
 		$strOriginPath = \TemplateLoader::getPath('be_main', 'html5');
-		$strDefaultPath = TL_ROOT . '/system/modules/core/templates/be_main.html5';
+		$strDefaultPath = TL_ROOT . '/system/modules/core/templates/backend/be_main.html5';
 
 		$blnChanged = false;
 
@@ -75,7 +80,7 @@ class FontAwesome extends Backend
 		if($strDefaultPath == $strOriginPath)
 		{
 			\TemplateLoader::addFile('be_main', 'system/modules/font-awesome/templates/dynamic');
-			//$GLOBALS['ICON_REPLACER']['navigation']['phpOnly'] = true;
+			$GLOBALS['ICON_REPLACER']['navigation']['phpOnly'] = true;
 		}
 
 		\TemplateLoader::addFile('be_navigation', 'system/modules/font-awesome/templates/dynamic');
@@ -154,7 +159,7 @@ class FontAwesome extends Backend
 
 		if($value !== null)
 		{
-			return sprintf('<span style="padding-left: 10px;"><i class="icon-%s"></i></span>', $value);
+			return sprintf($GLOBALS['BOOTSTRAP']['icons']['sets']['font-awesome']['template'], $value);
 		}
 
 		return '';
