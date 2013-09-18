@@ -1,3 +1,6 @@
 [submodule "src/assets/font-awesome"]
 	path = src/assets/font-awesome
 	url = git@github.com:FortAwesome/Font-Awesome.git
+[submodule "tools/spyc"]
+	path = tools/spyc
+	url = git@github.com:mustangostang/spyc.git
