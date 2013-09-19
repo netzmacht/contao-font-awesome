@@ -1,6 +1,6 @@
 <ul class="tl_level_2">
 <?php foreach ($this->modules as $strModule=>$arrConfig): ?>
-	<?php $strIcon = Netzmacht\IconReplacer::generateIcon('navigation', str_replace('navigation ', '', $arrConfig['class'])); if($strIcon != ''): ?>
+	<?php $strIcon = Netzmacht\FontAwesome\IconReplacer::generateIcon('navigation', str_replace('navigation ', '', $arrConfig['class'])); if($strIcon != ''): ?>
 	<li><a href="<?php echo $arrConfig['href']; ?>" class="<?php echo $arrConfig['class']; ?> icon" title="<?php echo $arrConfig['title']; ?>"><?php echo $strIcon; ?><?php echo $arrConfig['label']; ?></a></li>
 	<?php else: ?>
 	<li><a href="<?php echo $arrConfig['href']; ?>" class="<?php echo $arrConfig['class']; ?>" title="<?php echo $arrConfig['title']; ?>"<?php echo $arrConfig['icon']; ?>><?php echo $arrConfig['label']; ?></a></li>
