@@ -36,7 +36,7 @@ if(TL_MODE == 'BE')
 $GLOBALS['TL_CONFIG']['fontAwesomeInsertTag'] = 'fa';
 
 // support of icon handling of Bootstrap extension
-$GLOBALS['BOOTSTRAP']['icons']['sets']['font-awesome'] = array
+$GLOBALS['BOOTSTRAP']['miscellaneous']['icons']['sets']['font-awesome'] = array
 (
 	'path'      => 'system/modules/font-awesome/config/icons/icons.php',
 	'template'  => '<i class="icon-%s"></i>',
