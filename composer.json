@@ -1,0 +1,37 @@
+{
+    "name":"netzmacht/contao-font-awesome",
+    "description":"Integrates Font Awesome into Contao frontend and backend",
+    "keywords":["icons", "fontawesome", "icon font"],
+    "type":"contao-module",
+    "license":"LGPL-3.0+",
+    "authors":[
+        {
+            "name":"David Molineus",
+            "email":"mail@netzmacht.de",
+            "homepage":"http://www.netzmacht.de",
+            "role":"Project leader"
+        }
+    ],
+    "require":{
+        "php":">=5.3",
+        "contao/core":">=3.0",
+        "FortAwesome/Font-Awesome":">=3.2.0"
+    },
+    "autoload":{
+        "classmap":["src/"]
+    },
+    "replace": {
+        "contao-legacy/font-awesome": "*"
+    },
+    "extra":{
+        "contao": {
+            "symlinks":{
+                "system/modules/font-awesome": "system/modules/font-awesome",
+                "Font-Awesome": "assets/font-awesome"
+            },
+            "runonce":[
+                "system/modules/font-awesome/config/runonce.php"
+            ]
+        }
+    }
+}
