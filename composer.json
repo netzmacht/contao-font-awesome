@@ -23,6 +23,9 @@
     "replace": {
         "contao-legacy/font-awesome": "*"
     },
+    "suggest": {
+        "netzmacht/contao-bootstrap": "Integrates Bootstrap into Contao supporting FontAwesome"
+    },
     "extra":{
         "contao": {
             "symlinks":{
