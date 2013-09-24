@@ -26,8 +26,8 @@
     "extra":{
         "contao": {
             "symlinks":{
-                "system/modules/font-awesome": "system/modules/font-awesome",
-                "Font-Awesome": "assets/font-awesome"
+                "src/system/modules/font-awesome": "system/modules/font-awesome",
+                "../../fortawesome/font-awesome": "assets/font-awesome"
             },
             "runonce":[
                 "system/modules/font-awesome/config/runonce.php"
