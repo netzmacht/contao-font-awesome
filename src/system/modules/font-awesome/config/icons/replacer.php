@@ -19,6 +19,9 @@ $GLOBALS['ICON_REPLACER']['buttons']['imageIcons'][] = array('download-alt', 'in
 $GLOBALS['ICON_REPLACER']['buttons']['imageIcons'][] = array('refresh', 'database_update.png');
 $GLOBALS['ICON_REPLACER']['buttons']['imageIcons'][] = array('cog', 'settings_dialog.png');
 $GLOBALS['ICON_REPLACER']['buttons']['imageIcons'][] = array('upload-alt', 'composer_update.png');
+$GLOBALS['ICON_REPLACER']['buttons']['imageIcons'][] = array('code', 'experts_mode.png');
+$GLOBALS['ICON_REPLACER']['buttons']['imageIcons'][] = array('eraser', 'clear_composer_cache.png');
+$GLOBALS['ICON_REPLACER']['buttons']['imageIcons'][] = array('minus-sign-alt', 'undo_migration.png');
 
 $GLOBALS['ICON_REPLACER']['buttons']['styleIcons'][] = array('circle-arrow-left', 'header_back');
 $GLOBALS['ICON_REPLACER']['buttons']['styleIcons'][] = array('plus-sign', 'header_toggle');
