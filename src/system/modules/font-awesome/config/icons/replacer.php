@@ -16,6 +16,10 @@ $GLOBALS['ICON_REPLACER']['buttons']['target'] = '#tl_buttons a';
 $GLOBALS['ICON_REPLACER']['buttons']['addSpace'] = true;
 $GLOBALS['ICON_REPLACER']['buttons']['imageIcons'][] = array('refresh', 'dbcheck16.png');
 $GLOBALS['ICON_REPLACER']['buttons']['imageIcons'][] = array('download-alt', 'install16.png');
+$GLOBALS['ICON_REPLACER']['buttons']['imageIcons'][] = array('refresh', 'database_update.png');
+$GLOBALS['ICON_REPLACER']['buttons']['imageIcons'][] = array('cog', 'settings_dialog.png');
+$GLOBALS['ICON_REPLACER']['buttons']['imageIcons'][] = array('upload-alt', 'composer_update.png');
+
 $GLOBALS['ICON_REPLACER']['buttons']['styleIcons'][] = array('circle-arrow-left', 'header_back');
 $GLOBALS['ICON_REPLACER']['buttons']['styleIcons'][] = array('plus-sign', 'header_toggle');
 $GLOBALS['ICON_REPLACER']['buttons']['styleIcons'][] = array('plus', 'header_new');
@@ -27,6 +31,7 @@ $GLOBALS['ICON_REPLACER']['buttons']['styleIcons'][] = array('folder-close', 'he
 $GLOBALS['ICON_REPLACER']['buttons']['styleIcons'][] = array('download-alt', 'header_theme_import');
 $GLOBALS['ICON_REPLACER']['buttons']['styleIcons'][] = array('download-alt', 'header_css_import');
 $GLOBALS['ICON_REPLACER']['buttons']['styleIcons'][] = array('shopping-cart', 'header_store');
+
 $GLOBALS['ICON_REPLACER']['buttons']['listenTo'][] = array('document', 'domready');	
 		
 // context icons (right listed one)
@@ -115,6 +120,7 @@ $GLOBALS['ICON_REPLACER']['navigation']['styleIcons'][] = array('plus', 'theme_p
 $GLOBALS['ICON_REPLACER']['navigation']['styleIcons'][] = array('plus', 'theme_plus_variable');
 $GLOBALS['ICON_REPLACER']['navigation']['styleIcons'][] = array('time', 'cron');
 $GLOBALS['ICON_REPLACER']['navigation']['styleIcons'][] = array('columns', 'columnset');
+$GLOBALS['ICON_REPLACER']['navigation']['styleIcons'][] = array('puzzle-piece', 'composer');
 
 $GLOBALS['ICON_REPLACER']['navigation']['listenTo'][] = array('window', 'ajax_change');
 $GLOBALS['ICON_REPLACER']['navigation']['listenTo'][] = array('document', 'domready');
