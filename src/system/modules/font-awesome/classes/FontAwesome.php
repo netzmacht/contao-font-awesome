@@ -56,6 +56,11 @@ class FontAwesome extends Backend
 	 */
 	public function initialize()
 	{
+		if(TL_MODE != 'BE')
+		{
+			return;
+		}
+
 		// user is not authenticated at this point. we need it so isActive can access user settings.
 		// will override tl_language settings, so store it
 		// @see https://github.com/bit3/contao-theme-plus/issues/58
