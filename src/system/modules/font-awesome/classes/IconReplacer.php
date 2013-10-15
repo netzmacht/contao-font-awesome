@@ -85,7 +85,7 @@ class IconReplacer extends Backend
 	 */
 	public static function getImageIcon($strPart, $strTest)
 	{
-		if(!isset($GLOBALS['ICON_REPLACER'][$strPart])) 
+		if(!isset($GLOBALS['ICON_REPLACER'][$strPart]['imageIcons']))
 		{
 			return null;
 		}
@@ -93,7 +93,7 @@ class IconReplacer extends Backend
 		// go throw icon list and try to match 
 		foreach($GLOBALS['ICON_REPLACER'][$strPart]['imageIcons'] as $arrIcon)
 		{
-			if(strpos($arrIcon[1], $strTest) !== null) 
+			if(strpos($arrIcon[1], $strTest) !== false)
 			{
 				return $arrIcon;
 			}
@@ -112,7 +112,7 @@ class IconReplacer extends Backend
 	 */
 	public static function getStyleIcon($strPart, $strClass)
 	{
-		if(!isset($GLOBALS['ICON_REPLACER'][$strPart])) 
+		if(!isset($GLOBALS['ICON_REPLACER'][$strPart]['styleIcons']))
 		{
 			return null;
 		}
