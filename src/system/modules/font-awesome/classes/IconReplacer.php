@@ -25,9 +25,11 @@ class IconReplacer extends Backend
 	/**
 	 * generate icon as html
 	 * 
-	 * @param string part
-	 * @param string test case or class
-	 * @param int 0 searching for both, 1 search for style, 2 search for image
+	 * @param string $strPart part
+	 * @param string $strTestOrClass test case or class
+	 * @param int $intType 0 searching for both, 1 search for style, 2 search for image
+	 *
+	 * @return string
 	 */
 	public static function generateIcon($strPart, $strTestOrClass, $intType=0)
 	{
