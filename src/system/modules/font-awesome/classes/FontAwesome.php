@@ -74,6 +74,8 @@ class FontAwesome extends Backend
 			return;
 		}
 
+		$GLOBALS['TL_CSS']['font-awesome-icons'] = 'system/modules/font-awesome/assets/icons.min.css|all|static';
+
 		// template settings
 		$strOriginPath = \TemplateLoader::getPath('be_main', 'html5');
 		$strDefaultPath = TL_ROOT . '/system/modules/core/templates/backend/be_main.html5';
