@@ -27,7 +27,6 @@ $GLOBALS['TL_DCA']['tl_content']['metapalettes']['fontAwesomeIcon'] = array(
 $GLOBALS['TL_DCA']['tl_content']['metasubpalettes']['fontAwesome_iconStack'] = array(
 	'fontAwesome_iconStackBase',
 	'fontAwesome_iconStackBaseColor',
-	'fontAwesome_iconStackBaseOnTop',
 );
 
 
