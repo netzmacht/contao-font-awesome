@@ -12,7 +12,7 @@ $GLOBALS['ICON_REPLACER']['header']['styleIcons'][] = array('signout', 'header_l
 $GLOBALS['ICON_REPLACER']['header']['listenTo'][] = array('document', 'domready');
 
 // tl_buttons
-$GLOBALS['ICON_REPLACER']['buttons']['target'] = '#tl_buttons a';
+$GLOBALS['ICON_REPLACER']['buttons']['target'] = '#tl_buttons a, #tl_buttons_a a';
 $GLOBALS['ICON_REPLACER']['buttons']['addSpace'] = true;
 $GLOBALS['ICON_REPLACER']['buttons']['imageIcons'][] = array('refresh', 'dbcheck16.png');
 $GLOBALS['ICON_REPLACER']['buttons']['imageIcons'][] = array('download-alt', 'install16.png');
