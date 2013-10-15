@@ -104,9 +104,6 @@ class FontAwesome extends Backend
 		$strJson = json_encode($arrConfig);
 		$GLOBALS['TL_MOOTOOLS'][] = sprintf('<script type="text/javascript">var replaceIconsConfig = %s;</script>', $strJson);
 		$GLOBALS['TL_MOOTOOLS'][] = '<script type="text/javascript" src="system/modules/font-awesome/assets/replacer.min.js"></script>';
-
-		$GLOBALS['TL_CSS']['font-awesome']       = 'assets/font-awesome/css/font-awesome.css|all|static';
-		$GLOBALS['TL_CSS']['font-awesome-icons'] = 'system/modules/font-awesome/assets/icons.min.css|all|static';
 	}
 
 
@@ -136,7 +133,7 @@ class FontAwesome extends Backend
 			}
 
 			return sprintf(
-				$GLOBALS['BOOTSTRAP']['icons']['sets']['font-awesome']['template'],
+				$GLOBALS['FONT-AWESOME']['template'],
 				$class
 			);
 		}
@@ -164,7 +161,7 @@ class FontAwesome extends Backend
 
 		if($value !== null)
 		{
-			return sprintf($GLOBALS['BOOTSTRAP']['icons']['sets']['font-awesome']['template'], $value);
+			return sprintf($GLOBALS['FONT-AWESOME']['template'], $value);
 		}
 
 		return '';
