@@ -73,7 +73,7 @@ class ContentIcon extends \ContentElement
 		}
 
 		$this->Template->icon .= 'icon-' . implode(' icon-', $arrClasses);
-		$this->Template->iconStyle = ($strStyle == '' ?: (' style="' . $strStyle . '"'));
+		$this->Template->iconStyle = ($strStyle == '' ? '' : (' style="' . $strStyle . '"'));
 
 		if($this->fontAwesome_iconStack)
 		{
