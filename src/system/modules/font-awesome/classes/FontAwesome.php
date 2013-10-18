@@ -117,9 +117,9 @@ class FontAwesome extends Backend
 	public function hookGetPageLayout($objPage, $objLayout)
 	{
 		/** @var LayoutModel $objLayout */
-		if($objLayout->fontAweseome)
+		if($objLayout->fontAwesome)
 		{
-			$GLOBALS['TL_CSS']['font-awesome'] = 'assets/font-awesome/css/' . $objLayout->fontAweseome;
+			$GLOBALS['TL_CSS']['font-awesome'] = 'assets/font-awesome/css/' . $objLayout->fontAwesome;
 		}
 	}
 
