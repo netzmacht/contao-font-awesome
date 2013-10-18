@@ -14,6 +14,7 @@
 
 namespace Netzmacht\FontAwesome;
 use Backend;
+use Contao\LayoutModel;
 use Input;
 
 /**
@@ -106,6 +107,20 @@ class FontAwesome extends Backend
 		$strJson = json_encode($arrConfig);
 		$GLOBALS['TL_MOOTOOLS'][] = sprintf('<script type="text/javascript">var replaceIconsConfig = %s;</script>', $strJson);
 		$GLOBALS['TL_MOOTOOLS'][] = '<script type="text/javascript" src="system/modules/font-awesome/assets/replacer.min.js"></script>';
+	}
+
+
+	/**
+	 * @param $objPage
+	 * @param $objLayout
+	 */
+	public function hookGetPageLayout($objPage, $objLayout)
+	{
+		/** @var LayoutModel $objLayout */
+		if($objLayout->fontAweseome)
+		{
+			$GLOBALS['TL_CSS']['font-awesome'] = 'assets/font-awesome/css/' . $objLayout->fontAweseome;
+		}
 	}
 
 
