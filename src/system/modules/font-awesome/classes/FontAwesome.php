@@ -21,18 +21,8 @@ use Input;
  * icon replacer adds javascript to backend template if the icon replacer is enabled 
  * 
  */
-class FontAwesome extends Backend
+class FontAwesome
 {
-
-	/**
-	 * constructor
-	 */
-	public function __construct()
-	{
-		$this->import('BackendUser', 'User');
-
-		parent::__construct();
-	}
 
 		
 	/**
@@ -42,12 +32,17 @@ class FontAwesome extends Backend
 	 */
 	public function isActive()
 	{
+		if(TL_MODE == 'FE')
+		{
+			return false;
+		}
+
+		\BackendUser::getInstance()->authenticate();
+
 		return (
-			TL_MODE == 'BE' && (
-				$GLOBALS['TL_CONFIG']['requireFontAwesome'] ||
-				$GLOBALS['TL_CONFIG']['forceFontAwesome'] ||
-				$this->User->useFontAwesome == '1'
-			)
+			$GLOBALS['TL_CONFIG']['requireFontAwesome'] ||
+			$GLOBALS['TL_CONFIG']['forceFontAwesome'] ||
+			\BackendUser::getInstance()->useFontAwesome == '1'
 		);
 	}
 
@@ -57,20 +52,7 @@ class FontAwesome extends Backend
 	 */
 	public function initialize()
 	{
-		if(TL_MODE != 'BE')
-		{
-			return;
-		}
-
-		// user is not authenticated at this point. we need it so isActive can access user settings.
-		// will override tl_language settings, so store it
-		// @see https://github.com/bit3/contao-theme-plus/issues/58
-
-		$lang = $GLOBALS['TL_LANGUAGE'];
-		$this->User->authenticate();
-		$GLOBALS['TL_LANGUAGE'] = $lang;
-
-		if(!$this->isActive())
+		if($this->isActive())
 		{
 			return;
 		}
