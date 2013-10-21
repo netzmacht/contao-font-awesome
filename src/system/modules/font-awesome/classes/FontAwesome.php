@@ -52,7 +52,7 @@ class FontAwesome
 	 */
 	public function initialize()
 	{
-		if($this->isActive())
+		if(!$this->isActive())
 		{
 			return;
 		}
