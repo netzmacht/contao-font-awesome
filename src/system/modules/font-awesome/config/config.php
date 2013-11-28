@@ -42,7 +42,7 @@ $GLOBALS['FONT-AWESOME'] = array
 (
 	'path'       => 'system/modules/font-awesome/config/icons/icons.php',
 	'stylesheet' => 'assets/font-awesome/css/font-awesome.css|all|static',
-	'template'   => '<i class="icon-%s"></i>',
+	'template'   => '<i class="fa fa-%s"></i>',
 );
 
 $GLOBALS['BOOTSTRAP']['icons']['sets']['font-awesome'] = $GLOBALS['FONT-AWESOME'];

@@ -24,6 +24,24 @@ use Input;
 class FontAwesome
 {
 
+	/**
+	 * @var array
+	 */
+	protected $icons = array();
+
+
+	/**
+	 * Construct
+	 */
+	public function __construct()
+	{
+		foreach($this->getAllIcons() as $group) {
+			$this->icons = array_merge($this->icons, $group);
+		}
+
+		$this->debugMode = \BackendUser::getInstance()->themePlusDesignerMode || $GLOBALS['TL_CONFIG']['debugMode'];
+	}
+
 		
 	/**
 	 * check if font awesome is active
@@ -111,7 +129,7 @@ class FontAwesome
 	 *
 	 * Following formats are supported
 	 * {{fa::phone}}
-	 * {{fa::phone 4x muted}}                       every entry sperated by space get an icon- prefix
+	 * {{fa::phone 4x muted}}                       every entry sperated by space get an fa- prefix
 	 * {{fa::phone rotate-90 large::pull-left}}     2nd param is added as class without prefix
 	 *
 	 * @param $tag
@@ -124,7 +142,11 @@ class FontAwesome
 
 		if($parts[0] == $GLOBALS['TL_CONFIG']['fontAwesomeInsertTag'])
 		{
-			$class = str_replace(' ', ' icon-', $parts[1]);
+			if($this->debugMode && !$this->iconExists($parts[1])) {
+				return sprintf('<span style="color:red;">[fa fa-%s]</span>', $parts[1]);
+			}
+
+			$class = str_replace(' ', ' fa-', $parts[1]);
 
 			if(isset($parts[2]))
 			{
@@ -151,6 +173,16 @@ class FontAwesome
 
 
 	/**
+	 * @param $icon
+	 * @return bool
+	 */
+	public function iconExists($icon)
+	{
+		return in_array($icon, $this->icons);
+	}
+
+
+	/**
 	 * @param $dc
 	 * @return string
 	 */
@@ -165,4 +197,6 @@ class FontAwesome
 
 		return '';
 	}
+
 }
+

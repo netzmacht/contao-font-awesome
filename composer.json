@@ -14,8 +14,8 @@
     ],
     "require":{
         "php":">=5.3",
-        "contao/core":">=3.0",
-        "fortawesome/font-awesome":"~3.2.0"
+        "contao/core":"~3.1",
+        "fortawesome/font-awesome":"~4.0.0"
     },
     "autoload":{
         "classmap":["src/"]
