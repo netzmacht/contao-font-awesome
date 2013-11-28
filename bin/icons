@@ -1,36 +1,121 @@
 #!/usr/bin/env php
 <?php
 
-require_once dirname(__FILE__) . '/../tools/spyc/Spyc.php';
-
-$data = Spyc::YAMLLoad(dirname(__FILE__) . '/../src/assets/font-awesome/src/icons.yml');
-$categories = array();
-
-// transform icons in category based format
-foreach($data['icons'] as $icon)
+/**
+ * Class IconTools
+ */
+class IconTools
 {
-	foreach($icon['categories'] as $category)
+
+	/**
+	 * @throws InvalidArgumentException
+	 */
+	public function execute()
 	{
-		$categories[$category][] = $icon['id'];
+		global $argv;
+
+		if(isset($argv[1]))
+		{
+			$verbose = (isset($argv[2]) && $argv[2] == '-v');
+
+			switch($argv[1])
+			{
+				case 'update-icons':
+					$this->updateIcons($verbose);
+					return;
+					break;
+
+				case 'check-replacer':
+					$this->checkReplacer($verbose);
+					return;
+					break;
+			}
+		}
+
+		throw new InvalidArgumentException('Invalid call of icon tools');
 	}
-}
 
-$date   = date('d.m.Y h:i');
-$buffer = '';
 
-foreach($categories as $category => $icons)
-{
-	$buffer .= sprintf("\t '%s' => array (\n", $category);
-
-	foreach($icons as $icon)
+	/**
+	 * @param bool $verbose
+	 */
+	protected function checkReplacer($verbose=false)
 	{
-		$buffer .= sprintf("\t\t'%s',\n", $icon);
+		require_once './../src/system/modules/font-awesome/config/icons/replacer.php';
+
+		$icons  = require_once './../src/system/modules/font-awesome/config/icons/icons.php';
+		$exists = function($icon) use($icons)
+		{
+			foreach($icons as $group)
+			{
+				if(in_array($icon, $group)) {
+					return true;
+				}
+			}
+
+			return false;
+		};
+
+		foreach($GLOBALS['ICON_REPLACER'] as $group)
+		{
+			if(isset($group['imageIcons'])) {
+				foreach($group['imageIcons'] as $icon) {
+					if(!$exists($icon[0])) {
+						echo "\033[0;31m" .'[error] ' .$icon[0] . "\033[0m\n";
+					}
+					elseif($verbose) {
+						echo '[ok]    ' .$icon[0] . "\n";
+					}
+				}
+			}
+
+			if(isset($group['styleIcons'])) {
+				foreach($group['styleIcons'] as $icon) {
+					if(!$exists($icon[0])) {
+						echo "\033[0;31m" .'[error] ' .$icon[0] . "\033[0m\n";
+					}
+					elseif($verbose) {
+						echo '[ok]    ' .$icon[0] . "\n";
+					}
+				}
+			}
+		}
 	}
 
-	$buffer .= "\t),\n\n";
-}
 
-$output = <<<EOF
+	/**
+	 * @param bool $verbose
+	 */
+	protected function updateIcons($verbose=false)
+	{
+		$categories = $this->loadFromYaml();
+
+		$date   = date('d.m.Y h:i');
+		$buffer = '';
+		$count  = 0;
+
+		foreach($categories as $category => $icons)
+		{
+			$buffer .= sprintf("\t '%s' => array (\n", $category);
+
+			if($verbose) {
+				echo $category . " (" . count($icons) . ")\n";
+			}
+
+			$count += count($icons);
+
+			foreach($icons as $icon)
+			{
+				$buffer .= sprintf("\t\t'%s',\n", $icon);
+			}
+
+			$buffer .= "\t),\n\n";
+		}
+
+
+		echo "\n " . $count . ' Icons found.' . "\n";
+
+		$output = <<<EOF
 <?php
 
 /**
@@ -54,6 +139,34 @@ $buffer);
 EOF;
 
 
-$file = fopen(dirname(__FILE__) . '/../src/system/modules/font-awesome/config/icons/icons.php', 'wb+');
-fwrite($file, $output);
-fclose($file);
+		$file = fopen(dirname(__FILE__) . '/../src/system/modules/font-awesome/config/icons/icons.php', 'wb+');
+		fwrite($file, $output);
+		fclose($file);
+	}
+
+	protected function loadFromYaml()
+	{
+		require_once dirname(__FILE__) . '/../tools/spyc/Spyc.php';
+
+		$data = Spyc::YAMLLoad(dirname(__FILE__) . '/../src/assets/font-awesome/src/icons.yml');
+		$categories = array();
+
+		// transform icons in category based format
+		foreach($data['icons'] as $icon)
+		{
+			foreach($icon['categories'] as $category)
+			{
+				$categories[$category][] = $icon['id'];
+
+				if(isset($icon['aliases'])) {
+					$categories[$category] = array_merge($categories[$category], $icon['aliases']);
+				}
+			}
+		}
+
+		return $categories;
+	}
+}
+
+$controller = new IconTools();
+$controller->execute();
