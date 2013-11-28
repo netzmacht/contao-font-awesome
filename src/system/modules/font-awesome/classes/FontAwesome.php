@@ -39,7 +39,8 @@ class FontAwesome
 			$this->icons = array_merge($this->icons, $group);
 		}
 
-		$this->debugMode = \BackendUser::getInstance()->themePlusDesignerMode || $GLOBALS['TL_CONFIG']['debugMode'];
+		$this->debugMode = $this->debugMode = $GLOBALS['TL_CONFIG']['debugMode'] ||
+			(class_exists('ThemePlus\ThemePlus') && call_user_func(array('ThemePlus\ThemePlus', 'isDesignerMode')));
 	}
 
 		
@@ -140,16 +141,18 @@ class FontAwesome
 	{
 		$parts = explode('::', $tag);
 
-		if($parts[0] == $GLOBALS['TL_CONFIG']['fontAwesomeInsertTag'])
-		{
-			if($this->debugMode && !$this->iconExists($parts[1])) {
-				return sprintf('<span style="color:red;">[fa fa-%s]</span>', $parts[1]);
-			}
-
+		if($parts[0] == $GLOBALS['TL_CONFIG']['fontAwesomeInsertTag']) {
 			$class = str_replace(' ', ' fa-', $parts[1]);
 
-			if(isset($parts[2]))
-			{
+			if($this->debugMode) {
+				$icon = trimsplit(' ', $parts[1]);
+
+				if(!$this->iconExists($icon)) {
+					return sprintf('<span style="color:red;">[fa-%s]</span>', $class);
+				}
+			}
+
+			if(isset($parts[2])) {
 				$class .= ' ' . $parts[2];
 			}
 
