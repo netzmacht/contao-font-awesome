@@ -147,7 +147,7 @@ class FontAwesome
 			if($this->debugMode) {
 				$icon = trimsplit(' ', $parts[1]);
 
-				if(!$this->iconExists($icon)) {
+				if(!$this->iconExists($icon[0])) {
 					return sprintf('<span style="color:red;">[fa-%s]</span>', $class);
 				}
 			}
