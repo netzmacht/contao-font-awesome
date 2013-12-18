@@ -85,6 +85,7 @@ function IconReplacer(target, addSpace)
 			}
 			
 			if(icon !== null) {
+                icon.addClass('fa');
 				return;
 			}
 			
@@ -119,8 +120,9 @@ function IconReplacer(target, addSpace)
 					// icon already exists so we have to update it
 					if(icon !== null) {
 						console.log('icon updated ' + imageIcons[i][0]);
-						icon.set('class', 'icon-' + imageIcons[i][0]);
-						icon.addClass('icon-' + imageIcons[i][2].size);
+						icon.set('class', 'fa-' + imageIcons[i][0]);
+                        icon.addClass('fa');
+						icon.addClass('fa-' + imageIcons[i][2].size);
 						
 						if(imageIcons[i][2].addClass) {
 							icon.addClass(imageIcons[i][2].addClass);
@@ -180,8 +182,9 @@ function IconReplacer(target, addSpace)
 	var createIcon = function(className, options)
 	{
 		var icon = new Element('i');			
-		icon.addClass('icon-' + className);		
-		
+		icon.addClass('fa-' + className);
+        icon.addClass('fa');
+
 		if(addSpace) {
 			icon.set('html', '&nbsp;');
 		}
@@ -191,10 +194,10 @@ function IconReplacer(target, addSpace)
 		}
 		
 		if(!options.size) {
-			icon.addClass('icon-large');
+			icon.addClass('fa-large');
 		}
 		else {
-			icon.addClass('icon-' + options.size);
+			icon.addClass('fa-' + options.size);
 		}
 		
 		return icon;			
@@ -246,13 +249,13 @@ window.addEvent('domready', function() {
 	{
 		var icon = this.getElement('i');	
 		
-		if(icon.hasClass('icon-plus-sign')) {
-			icon.addClass('icon-minus-sign');
-			icon.removeClass('icon-plus-sign');
+		if(icon.hasClass('fa-plus-circle')) {
+			icon.addClass('fa-minus-circle');
+			icon.removeClass('fa-plus-circle');
 		}
 		else {
-			icon.removeClass('icon-minus-sign');
-			icon.addClass('icon-plus-sign');
+			icon.removeClass('fa-minus-circle');
+			icon.addClass('fa-plus-circle');
 		}		
 	});
 	
@@ -262,12 +265,12 @@ window.addEvent('domready', function() {
 		
 		if (icon != undefined) {
 			if(new String(icon.getPrevious('img').get('src')).test('Minus')) {
-				icon.addClass('icon-minus-sign');
-				icon.removeClass('icon-plus-sign');
+				icon.addClass('fa-minus-circle');
+				icon.removeClass('fa-plus-circle');
 			}
 			else {
-				icon.removeClass('icon-minus-sign');
-				icon.addClass('icon-plus-sign');
+				icon.removeClass('fa-minus-circle');
+				icon.addClass('fa-plus-circle');
 			}
 		}
 	});

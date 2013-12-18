@@ -41,11 +41,11 @@
     opacity: 0.8;
 }
 
-i.margin {
+.fa.margin {
     margin-top: 2px;
 }
 
-.icon-disabled {
+.fa-disabled {
     opacity: 0.4;
 }
 
@@ -62,5 +62,4 @@ i.margin {
     text-align: center;
     padding-bottom: 0;
     display: inline-block;
-    font-size: 0.95em;
 }
