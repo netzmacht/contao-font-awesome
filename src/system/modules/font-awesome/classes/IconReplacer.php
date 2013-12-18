@@ -39,12 +39,16 @@ class IconReplacer extends Backend
 		{
 			return '';
 		}
-		
-		return sprintf('<i class="icon-%s%s">%s</i>',
-			$arrIcon[0],
-			isset($arrIcon[2]['size']) ? ' icon-' . $arrIcon[2]['size'] : ' icon-large',
-			$GLOBALS['ICON_REPLACER']['addSpace'] ? '&nbsp;' : ''
-		);
+
+		$class = $arrIcon[0];
+		$class .= ' fa-' . (isset($arrIcon[2]['size']) ? $arrIcon[2]['size'] : 'large');
+		$icon  = sprintf($GLOBALS['FONT-AWESOME']['template'], $class);
+
+		if($GLOBALS['ICON_REPLACER']['addSpace']) {
+			$icon .= '&nbsp;';
+		}
+
+		return $icon;
 	}
 	
 	
