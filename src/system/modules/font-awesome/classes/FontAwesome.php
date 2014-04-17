@@ -51,8 +51,7 @@ class FontAwesome
 	 */
 	public function isActive()
 	{
-		if(TL_MODE == 'FE')
-		{
+		if(TL_MODE != 'BE') {
 			return false;
 		}
 
@@ -71,8 +70,7 @@ class FontAwesome
 	 */
 	public function initialize()
 	{
-		if(!$this->isActive())
-		{
+		if(!$this->isActive()) {
 			return;
 		}
 
@@ -86,8 +84,7 @@ class FontAwesome
 
 		// only change be_main if no other be_main then the default one is chosen
 		// we use customized navigation templates so we do not need to load icons dynamically
-		if($strDefaultPath == $strOriginPath)
-		{
+		if($strDefaultPath == $strOriginPath) {
 			\TemplateLoader::addFile('be_main', 'system/modules/font-awesome/templates/dynamic');
 			$GLOBALS['ICON_REPLACER']['navigation']['phpOnly'] = true;
 		}
@@ -97,8 +94,7 @@ class FontAwesome
 		// remove config which should not pass to javascript
 		$arrConfig = $GLOBALS['ICON_REPLACER'];
 
-		foreach($arrConfig as $strKey => $arrPart)
-		{
+		foreach($arrConfig as $strKey => $arrPart) {
 			if(isset($arrPart['phpOnly']) && $arrPart['phpOnly'] == true) {
 				unset($arrConfig[$strKey]);
 			}
@@ -118,8 +114,7 @@ class FontAwesome
 	public function hookGetPageLayout($objPage, $objLayout)
 	{
 		/** @var LayoutModel $objLayout */
-		if($objLayout->fontAwesome)
-		{
+		if($objLayout->fontAwesome) {
 			$GLOBALS['TL_CSS']['font-awesome'] = 'assets/font-awesome/css/' . $objLayout->fontAwesome;
 		}
 	}
@@ -193,8 +188,7 @@ class FontAwesome
 	{
 		$value = $dc->activeRecord->{$dc->field};
 
-		if($value !== null)
-		{
+		if($value !== null) {
 			return sprintf($GLOBALS['FONT-AWESOME']['template'], $value);
 		}
 
