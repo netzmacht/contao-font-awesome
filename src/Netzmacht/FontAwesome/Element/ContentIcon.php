@@ -32,55 +32,45 @@ class ContentIcon extends \ContentElement
 		// convert style
 		$this->fontAwesome_iconStyle = deserialize($this->fontAwesome_iconStyle);
 
-		if(is_array($this->fontAwesome_iconStyle))
-		{
-			foreach($this->fontAwesome_iconStyle as $style)
-			{
+		if(is_array($this->fontAwesome_iconStyle)) {
+			foreach($this->fontAwesome_iconStyle as $style) {
 				$arrClasses[] = $style;
 			}
 		}
 
-
 		$color = deserialize($this->fontAwesome_iconColor);
+		$style = '';
 
-		if($color[0] != '')
-		{
-			$strStyle = 'color: #' .$color[0] . ';';
+		if($color[0] != '') {
+			$style = 'color: #' .$color[0] . ';';
 		}
 
-		if($color[1] != '')
-		{
-			$strStyle .= 'opacity: ' . $color[1] . ';';
+		if($color[1] != '') {
+			$style .= 'opacity: ' . $color[1] . ';';
 		}
 
 		// apply rotation
-		if($this->fontAwesome_iconRotation != '')
-		{
+		if($this->fontAwesome_iconRotation != '') {
 			$arrClasses[] = $this->fontAwesome_iconRotation;
 		}
 
 		// apply size
-		if($this->fontAwesome_iconSize != '')
-		{
-			if($this->fontAwesome_iconStack)
-			{
+		if($this->fontAwesome_iconSize != '') {
+			if($this->fontAwesome_iconStack) {
 				$arrStack[] = $this->fontAwesome_iconSize;
 			}
-			else
-			{
+			else {
 				$arrClasses[] = $this->fontAwesome_iconSize;
 			}
 		}
 
-		$this->Template->icon .= 'icon-' . implode(' icon-', $arrClasses);
-		$this->Template->iconStyle = ($strStyle == '' ? '' : (' style="' . $strStyle . '"'));
+		$this->Template->icon 	  .= 'fa-' . implode(' fa-', $arrClasses);
+		$this->Template->iconStyle = ($style == '' ? '' : (' style="' . $style . '"'));
 
-		if($this->fontAwesome_iconStack)
-		{
+		if($this->fontAwesome_iconStack) {
 			$this->Template->base = 'icon-' . $this->fontAwesome_iconStackBase;
 
-			if($this->fontAwesome_iconStackBaseColor != '')
-			{
+			if($this->fontAwesome_iconStackBaseColor != '') {
 				$this->Template->base .= ' icon-' . $this->fontAwesome_iconStackBaseColor;
 			}
 

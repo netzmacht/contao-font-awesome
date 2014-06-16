@@ -1,7 +1,7 @@
 <div class="<?php echo $this->class; ?>" <?php if($this->cssID):?>id="<?php echo $this->cssID; ?>"<?php endif; ?>>
 <?php if($this->stack): ?>
-<span class="icon-stack <?php echo $this->stack; ?>"<?php echo $this->iconStyle; ?>>
-	<i class="icon-stack-base <?php echo $this->base; ?>"></i>
+<span class="fa-stack <?php echo $this->stack; ?>"<?php echo $this->iconStyle; ?>>
+	<i class="fa-stack-base <?php echo $this->base; ?>"></i>
 	<i class="<?php echo $this->icon; ?>"></i>
 </span>
 <?php else: ?>
