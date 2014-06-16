@@ -26,15 +26,15 @@ class ContentIcon extends \ContentElement
 		$this->Template->stackBaseOnTop = $this->fontAwesome_iconStackBaseTop;
 		$this->Template->stack = false;
 
-		$arrClasses = array($this->fontAwesome_icon);
-		$arrStack = array();
+		$classes = array($this->fontAwesome_icon);
+		$stack = array();
 
 		// convert style
 		$this->fontAwesome_iconStyle = deserialize($this->fontAwesome_iconStyle);
 
 		if(is_array($this->fontAwesome_iconStyle)) {
 			foreach($this->fontAwesome_iconStyle as $style) {
-				$arrClasses[] = $style;
+				$classes[] = $style;
 			}
 		}
 
@@ -51,30 +51,32 @@ class ContentIcon extends \ContentElement
 
 		// apply rotation
 		if($this->fontAwesome_iconRotation != '') {
-			$arrClasses[] = $this->fontAwesome_iconRotation;
+			$classes[] = $this->fontAwesome_iconRotation;
 		}
 
 		// apply size
 		if($this->fontAwesome_iconSize != '') {
 			if($this->fontAwesome_iconStack) {
-				$arrStack[] = $this->fontAwesome_iconSize;
+				$stack[] = $this->fontAwesome_iconSize;
 			}
 			else {
-				$arrClasses[] = $this->fontAwesome_iconSize;
+				$classes[] = $this->fontAwesome_iconSize;
 			}
 		}
 
-		$this->Template->icon 	  .= 'fa-' . implode(' fa-', $arrClasses);
+		$this->Template->icon 	  .= 'fa-' . implode(' fa-', $classes);
 		$this->Template->iconStyle = ($style == '' ? '' : (' style="' . $style . '"'));
 
 		if($this->fontAwesome_iconStack) {
-			$this->Template->base = 'icon-' . $this->fontAwesome_iconStackBase;
+			$this->Template->base = 'fa-' . $this->fontAwesome_iconStackBase;
 
 			if($this->fontAwesome_iconStackBaseColor != '') {
-				$this->Template->base .= ' icon-' . $this->fontAwesome_iconStackBaseColor;
+				$this->Template->base .= ' fa-' . $this->fontAwesome_iconStackBaseColor;
 			}
-
-			$this->Template->stack = $this->Template->stack . 'icon-' . implode(' icon-', $arrStack);
+			
+			if($stack) {
+				$this->Template->stack = $this->Template->stack . 'fa-' . implode(' fa-', $stack);	
+			}			
 		}
 	}
 
