@@ -31,6 +31,12 @@ class FontAwesome
 
 
 	/**
+	 * @var bool
+	 */
+	private $debugMode = false;
+
+
+	/**
 	 * Construct
 	 */
 	public function __construct()
@@ -39,9 +45,7 @@ class FontAwesome
 			$this->icons = array_merge($this->icons, $group);
 		}
 
-		$this->debugMode = $this->debugMode = $GLOBALS['TL_CONFIG']['debugMode'] ||
-			(class_exists('Bit3\Contao\ThemePlus\ThemePlus') && call_user_func(array('Bit3\Contao\ThemePlus\ThemePlus', 'isDesignerMode'))) ||
-			(class_exists('ThemePlus\ThemePlus') && call_user_func(array('ThemePlus\ThemePlus', 'isDesignerMode')));
+		$this->detectDebugMode();
 	}
 
 		
@@ -194,6 +198,23 @@ class FontAwesome
 		}
 
 		return '';
+	}
+
+
+	/**
+	 * Detect debug mode
+	 */
+	protected function detectDebugMode()
+	{
+		if($GLOBALS['TL_CONFIG']['debugMode']) {
+			$this->debugMode = $GLOBALS['TL_CONFIG']['debugMode'];
+		}
+		elseif(class_exists('Bit3\Contao\ThemePlus\ThemePlus')) {
+			$this->debugMode = call_user_func(array('Bit3\Contao\ThemePlus\ThemePlus', 'isDesignerMode'));
+		}
+		elseif(class_exists('ThemePlus\ThemePlus')) {
+			$this->debugMode = call_user_func(array('ThemePlus\ThemePlus', 'isDesignerMode'));
+		}
 	}
 
 }
