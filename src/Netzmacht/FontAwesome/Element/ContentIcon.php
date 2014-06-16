@@ -68,7 +68,8 @@ class ContentIcon extends \ContentElement
 		$this->Template->iconStyle = ($style == '' ? '' : (' style="' . $style . '"'));
 
 		if($this->fontAwesome_iconStack) {
-			$this->Template->base = 'fa-' . $this->fontAwesome_iconStackBase;
+			$this->Template->stack = 'fa-stack';
+			$this->Template->base  = 'fa-' . $this->fontAwesome_iconStackBase;
 
 			if($this->fontAwesome_iconStackBaseColor != '') {
 				$this->Template->base .= ' fa-' . $this->fontAwesome_iconStackBaseColor;
@@ -76,7 +77,7 @@ class ContentIcon extends \ContentElement
 			
 			if($stack) {
 				$this->Template->stack = $this->Template->stack . 'fa-' . implode(' fa-', $stack);	
-			}			
+			}
 		}
 	}
 
