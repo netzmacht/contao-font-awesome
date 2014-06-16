@@ -41,9 +41,9 @@ class IconTools
 	 */
 	protected function checkReplacer($verbose=false)
 	{
-		require_once './../src/system/modules/font-awesome/config/icons/replacer.php';
+		require_once dirname(__DIR__) .  '/module/config/icons/replacer.php';
 
-		$icons  = require_once './../src/system/modules/font-awesome/config/icons/icons.php';
+		$icons  = require dirname(__DIR__) .  '/module/config/icons/icons.php';
 		$exists = function($icon) use($icons)
 		{
 			foreach($icons as $group)
@@ -139,16 +139,16 @@ $buffer);
 EOF;
 
 
-		$file = fopen(dirname(__FILE__) . '/../src/system/modules/font-awesome/config/icons/icons.php', 'wb+');
+		$file = fopen(dirname(__DIR__) . '/module/config/icons/icons.php', 'wb+');
 		fwrite($file, $output);
 		fclose($file);
 	}
 
 	protected function loadFromYaml()
 	{
-		require_once dirname(__FILE__) . '/../tools/spyc/Spyc.php';
+		require_once dirname(__DIR__) . '/vendor/spyc/Spyc.php';
 
-		$data = Spyc::YAMLLoad(dirname(__FILE__) . '/../src/assets/font-awesome/src/icons.yml');
+		$data = Spyc::YAMLLoad(dirname(__DIR__) . '/vendor/font-awesome/src/icons.yml');
 		$categories = array();
 
 		// transform icons in category based format
