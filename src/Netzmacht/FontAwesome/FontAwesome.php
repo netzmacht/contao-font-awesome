@@ -209,8 +209,8 @@ class FontAwesome
 		if($GLOBALS['TL_CONFIG']['debugMode']) {
 			$this->debugMode = $GLOBALS['TL_CONFIG']['debugMode'];
 		}
-		elseif(class_exists('Bit3\Contao\ThemePlus\ThemePlus')) {
-			$this->debugMode = call_user_func(array('Bit3\Contao\ThemePlus\ThemePlus', 'isDesignerMode'));
+		elseif(class_exists('Bit3\Contao\ThemePlus\ThemePlusEnvironment')) {
+			$this->debugMode = call_user_func(array('Bit3\Contao\ThemePlus\ThemePlusEnvironment', 'isDesignerMode'));
 		}
 		elseif(class_exists('ThemePlus\ThemePlus')) {
 			$this->debugMode = call_user_func(array('ThemePlus\ThemePlus', 'isDesignerMode'));
