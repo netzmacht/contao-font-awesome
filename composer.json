@@ -16,10 +16,10 @@
         "php":">=5.3",
         "contao/core":"~3.1",
         "bit3/contao-meta-palettes": ">=1.4.3,<2.0",
-        "fortawesome/font-awesome":"~4.0.0"
+        "components/font-awesome":"~4.0.0"
     },
     "autoload":{
-        "classmap":["src/"]
+        "psr-0": { "Netzmacht\\FontAwesome\\": "src/" }
     },
     "replace": {
         "contao-legacy/font-awesome": "*"
@@ -29,12 +29,11 @@
     },
     "extra":{
         "contao": {
-            "symlinks":{
-                "src/system/modules/font-awesome": "system/modules/font-awesome",
-                "../../fortawesome/font-awesome": "assets/font-awesome"
+            "sources":{
+                "module": "system/modules/font-awesome"
             },
             "runonce":[
-                "system/modules/font-awesome/config/runonce.php"
+                "runonce/runonce.php"
             ]
         }
     }
