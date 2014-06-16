@@ -70,9 +70,10 @@ class ContentIcon extends \ContentElement
 		if($this->fontAwesome_iconStack) {
 			$this->Template->stack = 'fa-stack';
 			$this->Template->base  = 'fa-' . $this->fontAwesome_iconStackBase;
+			$this->Template->icon  = $this->Template->icon . ' fa-stack-1x';
 
 			if($this->fontAwesome_iconStackBaseColor != '') {
-				$this->Template->base .= ' fa-' . $this->fontAwesome_iconStackBaseColor;
+				$this->Template->base .= ' fa-' . $this->fontAwesome_iconStackBaseColor . ' fa-stack-2x';
 			}
 			
 			if($stack) {
