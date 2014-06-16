@@ -40,6 +40,7 @@ class FontAwesome
 		}
 
 		$this->debugMode = $this->debugMode = $GLOBALS['TL_CONFIG']['debugMode'] ||
+			(class_exists('Bit3\Contao\ThemePlus\ThemePlus') && call_user_func(array('Bit3\Contao\ThemePlus\ThemePlus', 'isDesignerMode'))) ||
 			(class_exists('ThemePlus\ThemePlus') && call_user_func(array('ThemePlus\ThemePlus', 'isDesignerMode')));
 	}
 
