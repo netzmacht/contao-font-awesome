@@ -1,10 +1,10 @@
 <div class="<?php echo $this->class; ?>" <?php if($this->cssID):?>id="<?php echo $this->cssID; ?>"<?php endif; ?>>
-<?php if($this->stack): ?>
-<span class="<?php echo $this->stack; ?>"<?php echo $this->iconStyle; ?>>
+	<?php if($this->stack): ?>
+		<span class="<?php echo $this->stack; ?>">
 	<i class="fa <?php echo $this->base; ?>"></i>
-	<i class="fa <?php echo $this->icon; ?>"></i>
+	<i class="fa <?php echo $this->icon; ?>" <?php echo $this->iconStyle; ?>></i>
 </span>
-<?php else: ?>
-<i class="fa <?php echo $this->icon; ?>"<?php echo $this->iconStyle; ?>></i>
-<?php endif; ?>
+	<?php else: ?>
+		<i class="fa <?php echo $this->icon; ?>"<?php echo $this->iconStyle; ?>></i>
+	<?php endif; ?>
 </div>
