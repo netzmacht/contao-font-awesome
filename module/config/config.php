@@ -16,7 +16,7 @@
 /**
  * content element
  */
-$GLOBALS['TL_CTE']['texts']['fontAwesomeIcon'] = 'Netzmacht\FontAwesome\ContentIcon';
+$GLOBALS['TL_CTE']['texts']['fontAwesomeIcon'] = 'Netzmacht\FontAwesome\Element\ContentIcon';
 
 
 /**
