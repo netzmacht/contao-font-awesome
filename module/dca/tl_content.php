@@ -40,6 +40,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['fontAwesome_icon'] = array
 		'chosen'         => true,
 		'submitOnChange' => true,
 		'tl_class'       => 'w50 wizard',
+		'iconTemplate'   => 'fa-%s'
 	),
 	'wizard'           => array(
 		array('Netzmacht\FontAwesome\FontAwesome', 'generateIcon'),
