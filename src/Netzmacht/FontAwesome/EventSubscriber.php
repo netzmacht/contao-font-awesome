@@ -55,7 +55,13 @@ class EventSubscriber implements EventSubscriberInterface
 		$widget 	= $event->getWidget();
 		$inputGroup = $event->getContainer()->getWrapper();
 
-		if(!$inputGroup) {
+		// no input group or no bootstrap extension available or not enabled
+		if(!$inputGroup || ! class_exists('Netzmacht\Bootstrap\Bootstrap') || !\Netzmacht\Bootstrap\Bootstrap::isEnabled()) {
+			return;
+		}
+
+		// other icon set is loaded
+		if($GLOBALS['BOOTSTRAP']['icons']['active'] != 'font-awesome') {
 			return;
 		}
 
