@@ -18,6 +18,7 @@
  */
 $GLOBALS['TL_CTE']['texts']['fontAwesomeIcon'] = 'Netzmacht\FontAwesome\Element\ContentIcon';
 
+$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'Netzmacht\FontAwesome\EventSubscriber';
 
 /**
  * hooks
