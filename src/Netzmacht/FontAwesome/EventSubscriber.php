@@ -65,6 +65,11 @@ class EventSubscriber implements EventSubscriberInterface
 			return;
 		}
 
+		// fa-fw is applied in the icon set templates
+		if(strpos($GLOBALS['BOOTSTRAP']['icons']['sets']['font-awesome']['template'], 'fa-fw') !== false) {
+			return;
+		}
+
 		// add icon
 		if($widget->bootstrap_addIcon) {
 			$icon = Icons::generateIcon($widget->bootstrap_icon, 'fa-fw');
