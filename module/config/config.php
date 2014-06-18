@@ -31,7 +31,7 @@ if(TL_MODE == 'BE')
 {
 	require_once TL_ROOT . '/system/modules/font-awesome/config/icons/replacer.php';
 
-	$GLOBALS['TL_CSS']['font-awesome']       = 'assets/font-awesome/css/font-awesome.min.css|all|static';
+	$GLOBALS['TL_CSS']['font-awesome']       = 'assets/components/font-awesome/css/font-awesome.min.css|all|static';
 }
 
 // which insert tag will be used
@@ -41,7 +41,7 @@ $GLOBALS['TL_CONFIG']['fontAwesomeInsertTag'] = 'fa';
 $GLOBALS['FONT-AWESOME'] = array
 (
 	'path'       => 'system/modules/font-awesome/config/icons/icons.php',
-	'stylesheet' => 'assets/font-awesome/css/font-awesome.css|all|static',
+	'stylesheet' => 'assets/components/font-awesome/css/font-awesome.css|all|static',
 	'template'   => '<i class="fa fa-%s"></i>',
 );
 

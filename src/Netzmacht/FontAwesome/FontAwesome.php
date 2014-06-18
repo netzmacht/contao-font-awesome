@@ -99,7 +99,7 @@ class FontAwesome
 	{
 		/** @var LayoutModel $objLayout */
 		if($objLayout->fontAwesome) {
-			$GLOBALS['TL_CSS']['font-awesome'] = 'assets/font-awesome/css/' . $objLayout->fontAwesome;
+			$GLOBALS['TL_CSS']['font-awesome'] = 'assets/components/font-awesome/css/' . $objLayout->fontAwesome;
 		}
 	}
 
