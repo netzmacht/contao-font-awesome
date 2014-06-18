@@ -15,7 +15,7 @@
     "require":{
         "php":">=5.3",
         "contao/core":"~3.1",
-        "contao-community-alliance/composer-plugin":"~2.0",
+        "contao-community-alliance/composer-plugin":"~2.2",
         "bit3/contao-meta-palettes": ">=1.4.3,<2.0",
         "components/font-awesome":"~4.1.0"
     },
@@ -32,10 +32,7 @@
         "contao": {
             "sources":{
                 "module": "system/modules/font-awesome"
-            },
-            "runonce":[
-                "runonce/runonce.php"
-            ]
+            }
         }
     }
 }
