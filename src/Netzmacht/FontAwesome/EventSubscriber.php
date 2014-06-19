@@ -51,7 +51,7 @@ class EventSubscriber
 		if($widget->bootstrap_addIcon) {
 			$icon = sprintf(
 				$GLOBALS['BOOTSTRAP']['icons']['sets']['font-awesome']['template'],
-				$widget->bootstrap_icon . ' fa-fa'
+				$widget->bootstrap_icon . ' fa-fw'
 			);
 
 			if($widget->bootstrap_iconPosition == 'right') {
