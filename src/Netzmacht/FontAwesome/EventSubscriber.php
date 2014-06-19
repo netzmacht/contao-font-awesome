@@ -12,6 +12,7 @@
 namespace Netzmacht\FontAwesome;
 
 
+use Netzmacht\FormHelper\Event\Events;
 use Netzmacht\FormHelper\Event\GenerateEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -31,6 +32,11 @@ class EventSubscriber
 			return;
 		}
 
+		// wrapper is no input group, do nothing
+		if(!$inputGroup instanceof \Netzmacht\Bootstrap\Form\InputGroup) {
+			return;
+		}
+
 		// other icon set is loaded
 		if($GLOBALS['BOOTSTRAP']['icons']['active'] != 'font-awesome') {
 			return;
@@ -43,7 +49,10 @@ class EventSubscriber
 
 		// add icon
 		if($widget->bootstrap_addIcon) {
-			$icon = sprintf($GLOBALS['BOOTSTRAP']['icons']['sets']['font-awesome']['template'], $widget->bootstrap_icon . ' fa-fa');
+			$icon = sprintf(
+				$GLOBALS['BOOTSTRAP']['icons']['sets']['font-awesome']['template'],
+				$widget->bootstrap_icon . ' fa-fa'
+			);
 
 			if($widget->bootstrap_iconPosition == 'right') {
 				$inputGroup->setRight($icon);

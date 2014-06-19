@@ -21,7 +21,7 @@ $GLOBALS['TL_CTE']['texts']['fontAwesomeIcon'] = 'Netzmacht\FontAwesome\Element\
 /**
  * events
  */
-$GLOBALS['TL_EVENTS']['form-helper.generate-widget'][] = array('Netzmacht\FontAwesome\EventSubscriber', 'addIcon');
+$GLOBALS['TL_EVENTS']['form-helper.generate-widget'][] = array(array('Netzmacht\FontAwesome\EventSubscriber', 'addIcon'), -1);
 
 
 /**
