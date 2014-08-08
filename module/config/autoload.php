@@ -1,9 +1,6 @@
 <?php
 
 /**
- * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2013 Leo Feyer
  * 
  * @package Font-awesome
  * @link    https://contao.org
