@@ -17,7 +17,8 @@
         "contao/core":"~3.1",
         "contao-community-alliance/composer-plugin":"~2.2",
         "bit3/contao-meta-palettes": ">=1.4.3,<2.0",
-        "components/font-awesome":"~4.2.0"
+        "components/font-awesome":"~4.2.0",
+        "netzmacht/contao-iconwizard": "~1.0"
     },
     "autoload":{
         "psr-0": { "Netzmacht\\FontAwesome\\": "src/" }
