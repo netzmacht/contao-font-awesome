@@ -18,7 +18,15 @@ $GLOBALS['TL_CTE']['texts']['fontAwesomeIcon'] = 'Netzmacht\FontAwesome\Element\
 /**
  * events
  */
-$GLOBALS['TL_EVENTS']['form-helper.generate-widget'][] = array(array('Netzmacht\FontAwesome\EventSubscriber', 'addIcon'), -1);
+$GLOBALS['TL_EVENTS']['form-helper.generate-widget'][] = array(
+    array('Netzmacht\FontAwesome\EventSubscriber', 'handleWidgetGenerateEvent'),
+    -1
+);
+
+$GLOBALS['TL_EVENTS']['netzmacht.form-helper.generate-widget'][] = array(
+    array('Netzmacht\FontAwesome\EventSubscriber', 'handleViewEvent'),
+    -1
+);
 
 
 /**

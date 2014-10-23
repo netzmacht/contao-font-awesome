@@ -13,6 +13,7 @@ namespace Netzmacht\FontAwesome;
 
 
 use Netzmacht\Bootstrap\Form\InputGroup;
+use Netzmacht\Contao\FormHelper\Event\ViewEvent;
 use Netzmacht\FormHelper\Event\GenerateEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -22,26 +23,26 @@ class EventSubscriber
 	/**
 	 * @param GenerateEvent $event
 	 */
-	public static function addIcon(GenerateEvent $event)
+	public static function handleWidgetGenerateEvent(GenerateEvent $event)
 	{
 		$widget 	= $event->getWidget();
 		$inputGroup = $event->getContainer()->getWrapper();
 		$template   = static::getIconSetTemplateWhenEnabled($inputGroup, $widget);
 
-		if(!$template) {
-			return;
-		}
-
-		$icon = sprintf($template, $widget->bootstrap_icon . ' fa-fw');
-
-		if($widget->bootstrap_iconPosition == 'right') {
-			$inputGroup->setRight($icon);
-		}
-		else {
-			$inputGroup->setLeft($icon);
-		}
+        self::addIcon($template, $widget, $inputGroup);
 	}
 
+    /**
+     * @param ViewEvent $event
+     */
+    public static function handleViewEvent(ViewEvent $event)
+    {
+        $widget 	= $event->getWidget();
+        $inputGroup = $event->getContainer()->getWrapper();
+        $template   = static::getIconSetTemplateWhenEnabled($inputGroup, $widget);
+
+        self::addIcon($template, $widget, $inputGroup);
+    }
 
 	/**
 	 * @param $inputGroup
@@ -112,5 +113,25 @@ class EventSubscriber
 
 		return false;
 	}
+
+    /**
+     * @param $template
+     * @param $widget
+     * @param $inputGroup
+     */
+    public static function addIcon($template, $widget, $inputGroup)
+    {
+        if (!$template) {
+            return;
+        }
+
+        $icon = sprintf($template, $widget->bootstrap_icon . ' fa-fw');
+
+        if ($widget->bootstrap_iconPosition == 'right') {
+            $inputGroup->setRight($icon);
+        } else {
+            $inputGroup->setLeft($icon);
+        }
+    }
 
 }
