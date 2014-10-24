@@ -23,7 +23,7 @@ $GLOBALS['TL_EVENTS']['form-helper.generate-widget'][] = array(
     -1
 );
 
-$GLOBALS['TL_EVENTS']['netzmacht.form-helper.generate-widget'][] = array(
+$GLOBALS['TL_EVENTS']['form-helper.generate-view'][] = array(
     array('Netzmacht\FontAwesome\EventSubscriber', 'handleViewEvent'),
     -1
 );
