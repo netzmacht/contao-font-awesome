@@ -30,12 +30,9 @@
     "replace": {
         "contao-legacy/font-awesome": "*"
     },
-    "suggest": {
-        "netzmacht/contao-bootstrap": "Integrates Bootstrap into Contao supporting FontAwesome"
-    },
     "extra":{
         "branch-alias": {
-            "dev-master": "4.2.x-dev"
+            "dev-master": "4.3.x-dev"
         },
         "contao": {
             "sources":{
