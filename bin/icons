@@ -1,6 +1,8 @@
 #!/usr/bin/env php
 <?php
 
+require dirname(__DIR__) . '/vendor/autoload.php';
+
 /**
  * Class IconTools
  */
@@ -142,9 +144,7 @@ EOF;
 
 	protected function loadFromYaml()
 	{
-		require_once dirname(__DIR__) . '/vendor/spyc/Spyc.php';
-
-		$data = Spyc::YAMLLoad(dirname(__DIR__) . '/vendor/font-awesome/src/icons.yml');
+		$data = Spyc::YAMLLoad(dirname(__DIR__) . '/vendor/fortawesome/font-awesome/src/icons.yml');
 		$categories = array();
 
 		// transform icons in category based format
