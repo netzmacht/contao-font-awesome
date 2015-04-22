@@ -4,10 +4,10 @@
  * 
  * @package   font-awesome 
  * @author    David Molineus <http://www.netzmacht.de>
- * @license   GNU/LGPL 
- * @copyright Copyright 2012 David Molineus netzmacht creative 
- * 
- */  
+ * @license   GNU/LGPL
+ * @copyright Copyright 2012 David Molineus netzmacht creative
+ *
+ */
 
 namespace Netzmacht\FontAwesome;
 use Backend;
@@ -15,8 +15,8 @@ use Contao\LayoutModel;
 use Input;
 
 /**
- * icon replacer adds javascript to backend template if the icon replacer is enabled 
- * 
+ * icon replacer adds javascript to backend template if the icon replacer is enabled
+ *
  */
 class FontAwesome
 {
@@ -30,7 +30,7 @@ class FontAwesome
 	/**
 	 * @var bool
 	 */
-	private $debugMode = false;
+	private static $debugMode;
 
 	/**
 	 * @var bool
@@ -50,10 +50,10 @@ class FontAwesome
 		$this->detectDebugMode();
 	}
 
-		
+
 	/**
 	 * check if font awesome is active
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function isActive()
@@ -120,7 +120,7 @@ class FontAwesome
 		if($parts[0] == $GLOBALS['TL_CONFIG']['fontAwesomeInsertTag']) {
 			$class = str_replace(' ', ' fa-', $parts[1]);
 
-			if($this->debugMode) {
+			if(static::$debugMode) {
 				$icon = trimsplit(' ', $parts[1]);
 
 				if(!$this->iconExists($icon[0])) {
@@ -182,15 +182,31 @@ class FontAwesome
 	 */
 	protected function detectDebugMode()
 	{
-		if($GLOBALS['TL_CONFIG']['debugMode']) {
-			$this->debugMode = $GLOBALS['TL_CONFIG']['debugMode'];
+		if (static::$debugMode !== null) {
+			return;
 		}
-		elseif(class_exists('Bit3\Contao\ThemePlus\ThemePlusEnvironment')) {
-			$this->debugMode = call_user_func(array('Bit3\Contao\ThemePlus\ThemePlusEnvironment', 'isDesignerMode'));
+
+		if($GLOBALS['TL_CONFIG']['debugMode']) {
+			static::$debugMode = $GLOBALS['TL_CONFIG']['debugMode'];
+			return;
+		}
+
+		if(class_exists('Bit3\Contao\ThemePlus\ThemePlusEnvironment')) {
+			$className = 'Bit3\Contao\ThemePlus\ThemePlusEnvironment';
 		}
 		elseif(class_exists('ThemePlus\ThemePlus')) {
-			$this->debugMode = call_user_func(array('ThemePlus\ThemePlus', 'isDesignerMode'));
+			$className = 'ThemePlus\ThemePlus';
+
+		} else {
+			return;
 		}
+
+		// Initiate the user because Theme+ will trigger the database. Force Contao stack.
+		if (TL_MODE === 'FE') {
+			\FrontendUser::getInstance();
+		}
+
+		static::$debugMode = call_user_func(array($className, 'isDesignerMode'));
 	}
 
 
