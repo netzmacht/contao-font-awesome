@@ -58,7 +58,7 @@ class FontAwesome
 	 */
 	public function isActive()
 	{
-		if(TL_MODE != 'BE') {
+		if(TL_MODE != 'BE' || TL_SCRIPT === 'contao/install.php') {
 			return false;
 		}
 
