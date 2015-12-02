@@ -1,45 +1,51 @@
 {
-    "name":"netzmacht/contao-font-awesome",
-    "description":"Integrates Font Awesome into Contao frontend and backend",
-    "keywords":["icons", "fontawesome", "icon font"],
-    "type":"contao-module",
-    "license":"LGPL-3.0+",
-    "authors":[
-        {
-            "name":"David Molineus",
-            "email":"mail@netzmacht.de",
-            "homepage":"http://www.netzmacht.de",
-            "role":"Project leader"
-        }
-    ],
-    "require":{
-        "php":">=5.3",
-        "contao/core":"~3.1",
-        "contao-community-alliance/composer-plugin":"~2.2",
-        "contao-community-alliance/meta-palettes": ">=1.4.3,<2.0",
-        "components/font-awesome":"~4.4.0",
-        "netzmacht/contao-iconwizard": "~1.0",
-        "robloach/component-installer": "~0.1"
-    },
-    "require-dev": {
-        "fortawesome/font-awesome": "~4.4.0",
-        "mustangostang/spyc": "~0.5"
-    },
-    "autoload":{
-        "psr-0": { "Netzmacht\\FontAwesome\\": "src/" }
-    },
-    "replace": {
-        "contao-legacy/font-awesome": "*"
-    },
-    "extra":{
-        "branch-alias": {
-            "dev-master": "4.4.x-dev",
-            "dev-develop": "4.5.x-dev"
-        },
-        "contao": {
-            "sources":{
-                "module": "system/modules/font-awesome"
-            }
-        }
+  "name": "netzmacht/contao-font-awesome",
+  "description": "Integrates Font Awesome into Contao frontend and backend",
+  "keywords": [
+    "icons",
+    "fontawesome",
+    "icon font"
+  ],
+  "type": "contao-module",
+  "license": "LGPL-3.0+",
+  "authors": [
+    {
+      "name": "David Molineus",
+      "email": "david.molineus@netzmacht.de",
+      "homepage": "http://netzmacht.de",
+      "role": "Project leader"
     }
+  ],
+  "require": {
+    "php": ">=5.3",
+    "contao/core": "~3.1",
+    "contao-community-alliance/composer-plugin": "~2.2",
+    "contao-community-alliance/meta-palettes": ">=1.4.3,<2.0",
+    "components/font-awesome": "~4.5.0",
+    "netzmacht/contao-iconwizard": "~1.0",
+    "robloach/component-installer": "~0.1"
+  },
+  "require-dev": {
+    "fortawesome/font-awesome": "~4.5.0",
+    "mustangostang/spyc": "~0.5"
+  },
+  "autoload": {
+    "psr-0": {
+      "Netzmacht\\FontAwesome\\": "src/"
+    }
+  },
+  "replace": {
+    "contao-legacy/font-awesome": "*"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "4.5.x-dev",
+      "dev-develop": "4.6.x-dev"
+    },
+    "contao": {
+      "sources": {
+        "module": "system/modules/font-awesome"
+      }
+    }
+  }
 }
