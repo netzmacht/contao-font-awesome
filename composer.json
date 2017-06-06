@@ -18,15 +18,15 @@
   ],
   "require": {
     "php": ">=5.3",
-    "contao/core": "~3.1",
-    "contao-community-alliance/composer-plugin": "~2.2",
+    "contao/core-bundle": "~3.1 || ~4.3",
+    "contao-community-alliance/composer-plugin": "~2.4 || ~3.0",
     "contao-community-alliance/meta-palettes": ">=1.4.3,<2.0",
-    "components/font-awesome": "~4.6.3",
+    "components/font-awesome": "~4.7.0",
     "netzmacht/contao-iconwizard": "~1.0",
     "robloach/component-installer": "~0.1"
   },
   "require-dev": {
-    "fortawesome/font-awesome": "~4.6.3",
+    "fortawesome/font-awesome": "~4.7.0",
     "mustangostang/spyc": "~0.5"
   },
   "autoload": {
@@ -39,8 +39,8 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "4.5.x-dev",
-      "dev-develop": "4.6.x-dev"
+      "dev-master": "4.7.x-dev",
+      "dev-develop": "4.8.x-dev"
     },
     "contao": {
       "sources": {
