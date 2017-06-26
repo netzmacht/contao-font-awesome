@@ -18,8 +18,8 @@
   ],
   "require": {
     "php": ">=5.3",
-    "contao/core": "~3.1",
-    "contao-community-alliance/composer-plugin": "~2.2",
+    "contao/core-bundle":"~3.2 || ~4.2",
+    "contao-community-alliance/composer-plugin":"~2.4 || ~3.0",
     "contao-community-alliance/meta-palettes": ">=1.4.3,<2.0",
     "components/font-awesome": "~4.7.0",
     "netzmacht/contao-iconwizard": "~1.0",
