@@ -15,7 +15,6 @@ namespace Netzmacht\FontAwesome;
 use Netzmacht\Bootstrap\Form\InputGroup;
 use Netzmacht\Contao\FormHelper\Event\ViewEvent;
 use Netzmacht\FormHelper\Event\GenerateEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class EventSubscriber
 {
