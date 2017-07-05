@@ -38,7 +38,11 @@ $GLOBALS['TL_HOOKS']['getPageLayout'][]     = array('Netzmacht\FontAwesome\FontA
 // load icons config
 if(TL_MODE == 'BE') 
 {
-	$GLOBALS['TL_CSS']['font-awesome'] = 'assets/components/font-awesome/css/font-awesome.min.css|all|static';
+    if (version_compare(VERSION, '4.0', '<')) {
+        $GLOBALS['TL_CSS']['font-awesome'] = 'assets/components/font-awesome/css/font-awesome.min.css|all|static';
+    } else {
+        $GLOBALS['TL_CSS']['font-awesome'] = 'assets/font-awesome/css/font-awesome.min.css|all|static';
+    }
 }
 
 // which insert tag will be used
