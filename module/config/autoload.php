@@ -16,9 +16,7 @@ ClassLoader::addClasses(array
 	// Elements
 	'Netzmacht\FontAwesome\ContentIcon'             => 'system/modules/font-awesome/elements/ContentIcon.php',
 
-
 	// Classes
-	'Netzmacht\FontAwesome\IconReplacer'            => 'system/modules/font-awesome/classes/IconReplacer.php',
 	'Netzmacht\FontAwesome\FontAwesome'             => 'system/modules/font-awesome/classes/FontAwesome.php',
 ));
 

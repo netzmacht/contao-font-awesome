@@ -33,15 +33,16 @@ $GLOBALS['TL_EVENTS']['form-helper.generate-view'][] = array(
  * hooks
  */
 $GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('Netzmacht\FontAwesome\FontAwesome', 'replaceInsertTag');
-$GLOBALS['TL_HOOKS']['initializeSystem'][]  = array('Netzmacht\FontAwesome\FontAwesome', 'initialize');
 $GLOBALS['TL_HOOKS']['getPageLayout'][]     = array('Netzmacht\FontAwesome\FontAwesome', 'hookGetPageLayout');
 
 // load icons config
 if(TL_MODE == 'BE') 
 {
-	require_once TL_ROOT . '/system/modules/font-awesome/config/icons/replacer.php';
-
-	$GLOBALS['TL_CSS']['font-awesome']       = 'assets/components/font-awesome/css/font-awesome.min.css|all|static';
+    if (version_compare(VERSION, '4.0', '<')) {
+        $GLOBALS['TL_CSS']['font-awesome'] = 'assets/components/font-awesome/css/font-awesome.min.css|all|static';
+    } else {
+        $GLOBALS['TL_CSS']['font-awesome'] = 'assets/font-awesome/css/font-awesome.min.css|all|static';
+    }
 }
 
 // which insert tag will be used

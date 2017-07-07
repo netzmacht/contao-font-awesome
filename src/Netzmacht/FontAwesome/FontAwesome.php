@@ -10,9 +10,8 @@
  */
 
 namespace Netzmacht\FontAwesome;
-use Backend;
+
 use Contao\LayoutModel;
-use Input;
 
 /**
  * icon replacer adds javascript to backend template if the icon replacer is enabled
@@ -21,237 +20,153 @@ use Input;
 class FontAwesome
 {
 
-	/**
-	 * @var array
-	 */
-	protected $icons = array();
+    /**
+     * @var array
+     */
+    protected $icons = array();
 
 
-	/**
-	 * @var bool
-	 */
-	private static $debugMode;
-
-	/**
-	 * @var bool
-	 */
-	private $isActive;
+    /**
+     * @var bool
+     */
+    private static $debugMode;
 
 
-	/**
-	 * Construct
-	 */
-	public function __construct()
-	{
-		foreach($this->getAllIcons() as $group) {
-			$this->icons = array_merge($this->icons, $group);
-		}
+    /**
+     * Construct
+     */
+    public function __construct()
+    {
+        foreach($this->getAllIcons() as $group) {
+            $this->icons = array_merge($this->icons, $group);
+        }
 
-		$this->detectDebugMode();
-	}
+        $this->detectDebugMode();
+    }
 
-
-	/**
-	 * check if font awesome is active
-	 *
-	 * @return bool
-	 */
-	public function isActive()
-	{
-		if(TL_MODE != 'BE' || TL_SCRIPT === 'contao/install.php') {
-			return false;
-		}
-
-		if($this->isActive === null) {
-			\BackendUser::getInstance()->authenticate();
-
-			$this->isActive = $GLOBALS['TL_CONFIG']['requireFontAwesome'] ||
-				$GLOBALS['TL_CONFIG']['forceFontAwesome'] ||
-				\BackendUser::getInstance()->useFontAwesome == '1';
-		}
-
-		return $this->isActive;
-	}
+    /**
+     * @param $objPage
+     * @param $objLayout
+     */
+    public function hookGetPageLayout($objPage, $objLayout)
+    {
+        /** @var LayoutModel $objLayout */
+        if($objLayout->fontAwesome) {
+            if (version_compare(VERSION, '4.0', '<')) {
+                $GLOBALS['TL_CSS']['font-awesome'] = 'assets/components/font-awesome/css/' . $objLayout->fontAwesome;
+            } else {
+                $GLOBALS['TL_CSS']['font-awesome'] = 'assets/font-awesome/css/' . $objLayout->fontAwesome;
+            }
+        }
+    }
 
 
-	/**
-	 * initialize system
-	 */
-	public function initialize()
-	{
-		if(!$this->isActive()) {
-			return;
-		}
+    /**
+     * replace icon insert tag
+     *
+     * Following formats are supported
+     * {{fa::phone}}
+     * {{fa::phone 4x muted}}                       every entry sperated by space get an fa- prefix
+     * {{fa::phone rotate-90 large::pull-left}}     2nd param is added as class without prefix
+     *
+     * @param $tag
+     * @param $cache
+     * @return string
+     */
+    public function replaceInsertTag($tag, $cache)
+    {
+        $parts = explode('::', $tag);
 
-		$this->loadDynamicTemplates();
-		$this->initializeAssets();
-	}
+        if($parts[0] == $GLOBALS['TL_CONFIG']['fontAwesomeInsertTag']) {
+            $class = str_replace(' ', ' fa-', $parts[1]);
 
+            if(static::$debugMode) {
+                $icon = trimsplit(' ', $parts[1]);
 
-	/**
-	 * @param $objPage
-	 * @param $objLayout
-	 */
-	public function hookGetPageLayout($objPage, $objLayout)
-	{
-		/** @var LayoutModel $objLayout */
-		if($objLayout->fontAwesome) {
-			$GLOBALS['TL_CSS']['font-awesome'] = 'assets/components/font-awesome/css/' . $objLayout->fontAwesome;
-		}
-	}
+                if(!$this->iconExists($icon[0])) {
+                    return sprintf('<span style="color:red;">[fa-%s]</span>', $class);
+                }
+            }
 
+            if(isset($parts[2])) {
+                $class .= ' ' . $parts[2];
+            }
 
-	/**
-	 * replace icon insert tag
-	 *
-	 * Following formats are supported
-	 * {{fa::phone}}
-	 * {{fa::phone 4x muted}}                       every entry sperated by space get an fa- prefix
-	 * {{fa::phone rotate-90 large::pull-left}}     2nd param is added as class without prefix
-	 *
-	 * @param $tag
-	 * @param $cache
-	 * @return string
-	 */
-	public function replaceInsertTag($tag, $cache)
-	{
-		$parts = explode('::', $tag);
+            return sprintf(
+                $GLOBALS['FONT-AWESOME']['template'],
+                $class
+            );
+        }
 
-		if($parts[0] == $GLOBALS['TL_CONFIG']['fontAwesomeInsertTag']) {
-			$class = str_replace(' ', ' fa-', $parts[1]);
-
-			if(static::$debugMode) {
-				$icon = trimsplit(' ', $parts[1]);
-
-				if(!$this->iconExists($icon[0])) {
-					return sprintf('<span style="color:red;">[fa-%s]</span>', $class);
-				}
-			}
-
-			if(isset($parts[2])) {
-				$class .= ' ' . $parts[2];
-			}
-
-			return sprintf(
-				$GLOBALS['FONT-AWESOME']['template'],
-				$class
-			);
-		}
-
-		return false;
-	}
+        return false;
+    }
 
 
-	/**
-	 * @return mixed
-	 */
-	public function getAllIcons()
-	{
-		return include TL_ROOT . '/system/modules/font-awesome/config/icons/icons.php';
-	}
+    /**
+     * @return mixed
+     */
+    public function getAllIcons()
+    {
+        return include TL_ROOT . '/system/modules/font-awesome/config/icons/icons.php';
+    }
 
 
-	/**
-	 * @param $icon
-	 * @return bool
-	 */
-	public function iconExists($icon)
-	{
-		return in_array($icon, $this->icons);
-	}
+    /**
+     * @param $icon
+     * @return bool
+     */
+    public function iconExists($icon)
+    {
+        return in_array($icon, $this->icons);
+    }
 
 
-	/**
-	 * @param $dc
-	 * @return string
-	 */
-	public function generateIcon($dc)
-	{
-		$value = $dc->activeRecord->{$dc->field};
+    /**
+     * @param $dc
+     * @return string
+     */
+    public function generateIcon($dc)
+    {
+        $value = $dc->activeRecord->{$dc->field};
 
-		if($value !== null) {
-			return sprintf($GLOBALS['FONT-AWESOME']['template'], $value);
-		}
+        if($value !== null) {
+            return sprintf($GLOBALS['FONT-AWESOME']['template'], $value);
+        }
 
-		return '';
-	}
-
-
-	/**
-	 * Detect debug mode
-	 */
-	protected function detectDebugMode()
-	{
-		if (static::$debugMode !== null) {
-			return;
-		}
-
-		if($GLOBALS['TL_CONFIG']['debugMode']) {
-			static::$debugMode = $GLOBALS['TL_CONFIG']['debugMode'];
-			return;
-		}
-
-		if(class_exists('Bit3\Contao\ThemePlus\ThemePlusEnvironment')) {
-			$className = 'Bit3\Contao\ThemePlus\ThemePlusEnvironment';
-		}
-		elseif(class_exists('ThemePlus\ThemePlus')) {
-			$className = 'ThemePlus\ThemePlus';
-
-		} else {
-			return;
-		}
-
-		// Initiate the user because Theme+ will trigger the database. Force Contao stack.
-		if (TL_MODE === 'FE') {
-			\FrontendUser::getInstance();
-		}
-
-		static::$debugMode = call_user_func(array($className, 'isDesignerMode'));
-	}
+        return '';
+    }
 
 
-	/**
-	 */
-	protected function loadDynamicTemplates()
-	{
-		// template settings
-		$originPath = \TemplateLoader::getPath('be_main', 'html5');
-		$defaultPath = TL_ROOT . '/system/modules/core/templates/backend/be_main.html5';
+    /**
+     * Detect debug mode
+     */
+    protected function detectDebugMode()
+    {
+        if (static::$debugMode !== null) {
+            return;
+        }
 
-		// only change be_main if no other be_main then the default one is chosen
-		// we use customized navigation templates so we do not need to load icons dynamically
-		if($defaultPath == $originPath) {
-			if(version_compare(VERSION, '3.3', '>=')) {
-				$path = 'system/modules/font-awesome/templates/dynamic/3.3';
-			} else {
-				$path = 'system/modules/font-awesome/templates/dynamic/3.2';
-			}
+        if($GLOBALS['TL_CONFIG']['debugMode']) {
+            static::$debugMode = $GLOBALS['TL_CONFIG']['debugMode'];
+            return;
+        }
 
-			\TemplateLoader::addFile('be_main', $path);
-			$GLOBALS['ICON_REPLACER']['navigation']['phpOnly'] = true;
-		}
+        if(class_exists('Bit3\Contao\ThemePlus\ThemePlusEnvironment')) {
+            $className = 'Bit3\Contao\ThemePlus\ThemePlusEnvironment';
+        }
+        elseif(class_exists('ThemePlus\ThemePlus')) {
+            $className = 'ThemePlus\ThemePlus';
 
-		\TemplateLoader::addFile('be_navigation', 'system/modules/font-awesome/templates/dynamic');
-	}
+        } else {
+            return;
+        }
 
-	protected function initializeAssets()
-	{
-		$GLOBALS['TL_CSS']['font-awesome-icons'] = 'system/modules/font-awesome/assets/icons.min.css|all|static';
+        // Initiate the user because Theme+ will trigger the database. Force Contao stack.
+        if (TL_MODE === 'FE') {
+            \FrontendUser::getInstance();
+        }
 
-		// remove config which should not pass to javascript
-		$arrConfig = $GLOBALS['ICON_REPLACER'];
-
-		foreach($arrConfig as $strKey => $arrPart) {
-			if(isset($arrPart['phpOnly']) && $arrPart['phpOnly'] == true) {
-				unset($arrConfig[$strKey]);
-			}
-		}
-
-		// append javascript
-		$strJson                  = json_encode($arrConfig);
-		$GLOBALS['TL_MOOTOOLS'][] = sprintf('<script type="text/javascript">var replaceIconsConfig = %s;</script>', $strJson);
-		$GLOBALS['TL_MOOTOOLS'][] = '<script type="text/javascript" src="system/modules/font-awesome/assets/replacer.min.js"></script>';
-	}
-
+        static::$debugMode = call_user_func(array($className, 'isDesignerMode'));
+    }
 }
 
