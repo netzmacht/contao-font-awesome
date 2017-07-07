@@ -52,7 +52,11 @@ class FontAwesome
 	{
 		/** @var LayoutModel $objLayout */
 		if($objLayout->fontAwesome) {
-			$GLOBALS['TL_CSS']['font-awesome'] = 'assets/components/font-awesome/css/' . $objLayout->fontAwesome;
+            if (version_compare(VERSION, '4.0', '<')) {
+                $GLOBALS['TL_CSS']['font-awesome'] = 'assets/components/font-awesome/css/' . $objLayout->fontAwesome;
+            } else {
+                $GLOBALS['TL_CSS']['font-awesome'] = 'assets/font-awesome/css/' . $objLayout->fontAwesome;
+            }
 		}
 	}
 
