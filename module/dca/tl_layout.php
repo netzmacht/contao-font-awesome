@@ -8,7 +8,7 @@
  */
 
 
-\MetaPalettes::appendFields('tl_layout', 'style', array('fontAwesome'));
+\ContaoCommunityAlliance\MetaPalettes\MetaPalettes::appendFields('tl_layout', 'style', array('fontAwesome'));
 
 $GLOBALS['TL_DCA']['tl_layout']['fields']['fontAwesome'] = array
 (
