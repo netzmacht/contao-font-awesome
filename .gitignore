@@ -1,3 +1,25 @@
-/vendor
-/components
+# OS
+.DS_Store
+Thumbs.db
+.directory
+
+# IDEs
+.buildpath
+.project
+.settings/
+.build/
+.external*/
+.idea/
+nbproject/
+
+# composer related
+vendor/
 composer.lock
+
+# build
+build/
+build.properties
+docs/_build
+
+# Translations
+.tx
